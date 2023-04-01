@@ -47,16 +47,32 @@ if __name__ == "__main__":
 
     # create GUI places 
     place_product_TK = canvas.create_oval(50, 50, 150, 150, outline='black', width=2)
-    insert_coin_TK = canvas.create_oval(250, 50, 350, 150, outline='black', width=2)
+    text1 = canvas.create_text(100, 100, text='P1')
+    place_storage_TK = canvas.create_oval(250, 250, 350, 350, outline='black', width=2)
+    text2 = canvas.create_text(300, 300, text='P2')
+    insert_coin_TK = canvas.create_rectangle(280, 50, 320, 150, outline='black', width=2)
+    text3 = canvas.create_text(300, 100, text='T1')
     validate_coin_place_TK = canvas.create_oval(450, 50, 550, 150, outline='black', width=2)
-    dispense_product_place_TK = canvas.create_oval(650, 50, 750, 150, outline='black', width=2)
+    text4 = canvas.create_text(500, 100, text='P3')
+    dispense_product_place_TK = canvas.create_rectangle(680, 50, 720, 150, outline='black', width=2)
+    text5 = canvas.create_text(700, 100, text='T2')
+    abort_TK = return_change_TK = canvas.create_oval(650, 250, 750, 350, outline='black', width=2)
+    text6 = canvas.create_text(700, 300, text='P4')
     return_change_TK = canvas.create_oval(850, 50, 950, 150, outline='black', width=2)
+    text7 = canvas.create_text(900, 100, text='P5')
 
     # create GUI token
     token_TK = canvas.create_oval(75, 75, 125, 125, fill='black')
+    token_Tk = canvas.create_oval(275, 275, 325, 325, fill='black')
 
     # create GUI arrows
     # arrow_coords = (150, 100, 100, 150)
+    line1 = canvas.create_line(150, 100, 280, 100, arrow=tk.LAST)
+    line2 = canvas.create_line(320, 100, 450, 100, arrow=tk.LAST)
+    line3 = canvas.create_line(550, 100, 680, 100, arrow=tk.LAST)
+    line4 = canvas.create_line(720, 100, 850, 100, arrow=tk.LAST)
+    line5 = canvas.create_line(300, 250, 300, 150, arrow=tk.LAST)
+    line6 = canvas.create_line(700, 150, 700, 250, arrow=tk.LAST)
     # canvas.create_line(*arrow_coords, arrow='last', width=2)
 
     # Define the Petri net places
