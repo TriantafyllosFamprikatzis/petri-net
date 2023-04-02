@@ -83,7 +83,6 @@ if __name__ == "__main__":
     insert_coin_place = False
     validate_coin_place = False
     dispense_product_place = False
-    return_change_place = False
 
     def messageHandler(message):
         petri_log_label = tk.Label(root, text=message)
@@ -107,20 +106,34 @@ if __name__ == "__main__":
         if validate_coin_place:
             if transition2():
                 canvas.itemconfigure(token_TK_P3, state="normal")
-                messageHandler("Το κέρμα έχει επικυρωθεί, το προϊόν έχει διανεμηθεί.")
+                messageHandler("Το κέρμα έχει επικυρωθεί")
                 dispense_product_place = True
                 validate_coin_place = False
 
-        if dispense_product_place:
+        if dispense_product_place:            
             if transition3():
-                canvas.itemconfigure(token_TK_P3, state="hidden")
-                canvas.itemconfigure(token_TK_P5, state="normal")
-                messageHandler("Έδωσε ρέστα.")
-                return_change_place = True
-                dispense_product_place = False
+                def buy():
+                    canvas.itemconfigure(token_TK_P3, state="hidden")
+                    canvas.itemconfigure(token_TK_P5, state="normal")
 
-        if return_change_place:
-            messageHandler("Συναλλαγή ολοκληρώθηκε!")
+                    messageHandler("Το προϊόν έχει διανεμηθεί, η συναλλαγή ολοκληρώθηκε!")
+
+                    buy_product_button.destroy()
+                    cancel_product_button.destroy()
+
+                def cancel():
+                    canvas.itemconfigure(token_TK_P3, state="hidden")
+                    canvas.itemconfigure(token_TK_P4, state="normal")
+
+                    messageHandler("Συναλλαγή ακυρώθηκε!")
+                    
+                    buy_product_button.destroy()
+                    cancel_product_button.destroy()
+
+                buy_product_button = tk.Button(root, text="Αγορά", command=buy)
+                buy_product_button.pack()
+                cancel_product_button = tk.Button(root, text="Ακύρωση", command=cancel)
+                cancel_product_button.pack()
 
     select_product_label = tk.Label(root, text="Επιλέξτε προϊόν")
     select_product_label.pack()
