@@ -62,9 +62,12 @@ if __name__ == "__main__":
     text7 = canvas.create_text(900, 100, text='P5')
 
     # create GUI token
-    token_TK = canvas.create_oval(75, 75, 125, 125, fill='black')
-    token_Tk = canvas.create_oval(275, 275, 325, 325, fill='black')
-
+    token_TK_P1 = canvas.create_oval(75, 75, 125, 125, fill='black', state="normal")
+    token_TK_P2 = canvas.create_oval(275, 275, 325, 325, fill='black', state="normal")
+    token_TK_P3 = canvas.create_oval(475, 75, 525, 125, fill="black", state="hidden")
+    token_TK_P4 = canvas.create_oval(675, 275, 725, 325, fill="black", state="hidden")
+    token_TK_P5 = canvas.create_oval(875, 75, 925, 125, fill="black", state="hidden")
+    
     # create GUI arrows
     # arrow_coords = (150, 100, 100, 150)
     line1 = canvas.create_line(150, 100, 280, 100, arrow=tk.LAST)
@@ -82,17 +85,7 @@ if __name__ == "__main__":
     dispense_product_place = False
     return_change_place = False
 
-    def move_token(x1, y1, x2, y2, message):
-        token_x1, token_y1, token_x2, token_y2 = canvas.coords(token_TK)
-
-        # Calculate the center of the  oval
-        place_x = (x1 + x2) / 2
-        place_y = (y1 + y2) / 2
-
-        # Move the token to the center of the insert_coin_TK oval
-        canvas.move(token_TK, place_x - (token_x1 + token_x2) / 2, place_y - (token_y1 + token_y2) / 2)
-
-        # Display message transition
+    def messageHandler(message):
         petri_log_label = tk.Label(root, text=message)
         petri_log_label.pack()
 
@@ -100,31 +93,34 @@ if __name__ == "__main__":
         place_product_place = True
 
         if place_product_place:
-            root.after(1000, lambda:move_token(250, 50, 350, 150, "Το προϊόν προστέθηκε"))
             insert_coin_place = True
             place_product_place = False
 
         if insert_coin_place:
             if transition1():
-                root.after(2000, lambda:move_token(450, 50, 550, 150, "Έγινε εισαγωγή νομίσματος."))
+                canvas.itemconfigure(token_TK_P1, state="hidden")
+                canvas.itemconfigure(token_TK_P2, state="hidden")
+                messageHandler("Το προϊόν προστέθηκε και έγινε εισαγωγή νομίσματος.")
                 validate_coin_place = True
                 insert_coin_place = False   
 
         if validate_coin_place:
             if transition2():
-                root.after(3000, lambda:move_token(650, 50, 750, 150, "Το κέρμα έχει επικυρωθεί, το προϊόν έχει διανεμηθεί."))
+                canvas.itemconfigure(token_TK_P3, state="normal")
+                messageHandler("Το κέρμα έχει επικυρωθεί, το προϊόν έχει διανεμηθεί.")
                 dispense_product_place = True
                 validate_coin_place = False
 
         if dispense_product_place:
             if transition3():
-                root.after(4000, lambda:move_token(850, 50, 950, 150, "Έδωσε ρέστα."))
+                canvas.itemconfigure(token_TK_P3, state="hidden")
+                canvas.itemconfigure(token_TK_P5, state="normal")
+                messageHandler("Έδωσε ρέστα.")
                 return_change_place = True
                 dispense_product_place = False
 
         if return_change_place:
-            completion_message = tk.Label(root, text="Συναλλαγή ολοκληρώθηκε!")
-            root.after(5000, completion_message.pack)
+            messageHandler("Συναλλαγή ολοκληρώθηκε!")
 
     select_product_label = tk.Label(root, text="Επιλέξτε προϊόν")
     select_product_label.pack()
