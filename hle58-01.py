@@ -90,6 +90,7 @@ if __name__ == "__main__":
 
     def run_petri_net():
         place_product_place = True
+        select_product_button.destroy()
 
         if place_product_place:
             insert_coin_place = True
@@ -135,9 +136,7 @@ if __name__ == "__main__":
                 cancel_product_button = tk.Button(root, text="Ακύρωση", command=cancel)
                 cancel_product_button.pack()
 
-    select_product_label = tk.Label(root, text="Επιλέξτε προϊόν")
-    select_product_label.pack()
-    select_product_button = tk.Button(root, text="submit", command=run_petri_net)
+    select_product_button = tk.Button(root, text="Επιλέξτε προϊόν", command=run_petri_net)
     select_product_button.pack()
 
     root.mainloop()
