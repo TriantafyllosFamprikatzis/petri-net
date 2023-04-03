@@ -93,6 +93,28 @@ if __name__ == "__main__":
         select_product_button.destroy()
 
         if place_product_place:
+            # Create a coin menu with radio buttons
+            coin_var = tk.StringVar(value="€")
+            coin_menu = tk.Frame(root)
+            tk.Label(coin_menu, text="Εισάγετε νόμισμα:").pack(anchor="w")
+            tk.Radiobutton(coin_menu, text="€1", variable=coin_var, value="1euro").pack(anchor="c")
+            tk.Radiobutton(coin_menu, text="€2", variable=coin_var, value="2euro").pack(anchor="c")
+            coin_menu.pack(anchor="c")
+
+            insert_coin_place = True
+            place_product_place = False
+
+        if insert_coin_place:
+            # Use the selected coin value
+            coin_value = coin_var.get()
+            if transition1():
+                canvas.itemconfigure(token_TK_P1, state="hidden")
+                canvas.itemconfigure(token_TK_P2, state="hidden")
+                messageHandler(f"Το προϊόν προστέθηκε και εισαγωγή νομίσματος: {coin_value}")
+                validate_coin_place = True
+                insert_coin_place = False
+
+        if place_product_place:
             insert_coin_place = True
             place_product_place = False
 
@@ -135,6 +157,16 @@ if __name__ == "__main__":
                 buy_product_button.pack()
                 cancel_product_button = tk.Button(root, text="Ακύρωση", command=cancel)
                 cancel_product_button.pack()
+
+    # Create a drink menu with radio buttons
+    drink_var = tk.StringVar(value="water1euro")
+    drink_menu = tk.Frame(root)
+    tk.Label(drink_menu, text="Menu").pack(anchor="c")
+    tk.Label(drink_menu, text="Επιλέξτε ποτό:").pack(anchor="c")
+    tk.Radiobutton(drink_menu, text="Νερό (€1)", variable=drink_var, value="water1euro").pack(anchor="c")
+    tk.Radiobutton(drink_menu, text="Παγωμένο τσάι (€2)", variable=drink_var, value="icetea2euro").pack(anchor="c")
+    tk.Radiobutton(drink_menu, text="Λεμονάδα (€1.5)", variable=drink_var, value="lemonade1.5euro").pack(anchor="c")
+    drink_menu.pack(anchor="c")
 
     select_product_button = tk.Button(root, text="Επιλέξτε προϊόν", command=run_petri_net)
     select_product_button.pack()
