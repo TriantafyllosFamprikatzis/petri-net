@@ -33,12 +33,6 @@ def transition2():
     else:
         return False
 
-def transition3():
-    if return_change():
-        return True
-    else:
-        return False
-
 if __name__ == "__main__":
     root = tk.Tk()
     canvas = tk.Canvas(root, width=1024, height=500)
@@ -82,25 +76,34 @@ if __name__ == "__main__":
     place_product_place = False
     insert_coin_place = False
     validate_coin_place = False
-    dispense_product_place = False
 
     def messageHandler(message):
         petri_log_label = tk.Label(root, text=message)
         petri_log_label.pack()
 
+    def buy():
+        canvas.itemconfigure(token_TK_P3, state="hidden")
+        canvas.itemconfigure(token_TK_P5, state="normal")
+
+        buy_product_button.config(state="disabled")
+        cancel_product_button.config(state="disabled")
+
+        messageHandler("Το προϊόν έχει διανεμηθεί, η συναλλαγή ολοκληρώθηκε!")
+
+    def cancel():
+        canvas.itemconfigure(token_TK_P3, state="hidden")
+        canvas.itemconfigure(token_TK_P4, state="normal")
+
+        buy_product_button.config(state="disabled")
+        cancel_product_button.config(state="disabled")
+
+        messageHandler("Συναλλαγή ακυρώθηκε!")
+
     def run_petri_net():
         place_product_place = True
-        select_product_button.destroy()
+        select_product_button.config(state="disabled")
 
         if place_product_place:
-            # Create a coin menu with radio buttons
-            coin_var = tk.StringVar(value="€")
-            coin_menu = tk.Frame(root)
-            tk.Label(coin_menu, text="Εισάγετε νόμισμα:").pack(anchor="w")
-            tk.Radiobutton(coin_menu, text="€1", variable=coin_var, value="1euro").pack(anchor="c")
-            tk.Radiobutton(coin_menu, text="€2", variable=coin_var, value="2euro").pack(anchor="c")
-            coin_menu.pack(anchor="c")
-
             insert_coin_place = True
             place_product_place = False
 
@@ -110,9 +113,11 @@ if __name__ == "__main__":
             if transition1():
                 canvas.itemconfigure(token_TK_P1, state="hidden")
                 canvas.itemconfigure(token_TK_P2, state="hidden")
-                messageHandler(f"Το προϊόν προστέθηκε και εισαγωγή νομίσματος: {coin_value}")
+                
                 validate_coin_place = True
                 insert_coin_place = False
+
+                messageHandler(f"Το προϊόν προστέθηκε και εισαγωγή νομίσματος: {coin_value}")
 
         if place_product_place:
             insert_coin_place = True
@@ -122,53 +127,47 @@ if __name__ == "__main__":
             if transition1():
                 canvas.itemconfigure(token_TK_P1, state="hidden")
                 canvas.itemconfigure(token_TK_P2, state="hidden")
-                messageHandler("Το προϊόν προστέθηκε και έγινε εισαγωγή νομίσματος.")
+
                 validate_coin_place = True
-                insert_coin_place = False   
+                insert_coin_place = False
+
+                messageHandler("Το προϊόν προστέθηκε και έγινε εισαγωγή νομίσματος.")
 
         if validate_coin_place:
             if transition2():
                 canvas.itemconfigure(token_TK_P3, state="normal")
-                messageHandler("Το κέρμα έχει επικυρωθεί")
-                dispense_product_place = True
+                
                 validate_coin_place = False
+                
+                buy_product_button.config(state="active")
+                cancel_product_button.config(state="active")
 
-        if dispense_product_place:            
-            if transition3():
-                def buy():
-                    canvas.itemconfigure(token_TK_P3, state="hidden")
-                    canvas.itemconfigure(token_TK_P5, state="normal")
-
-                    messageHandler("Το προϊόν έχει διανεμηθεί, η συναλλαγή ολοκληρώθηκε!")
-
-                    buy_product_button.destroy()
-                    cancel_product_button.destroy()
-
-                def cancel():
-                    canvas.itemconfigure(token_TK_P3, state="hidden")
-                    canvas.itemconfigure(token_TK_P4, state="normal")
-
-                    messageHandler("Συναλλαγή ακυρώθηκε!")
-                    
-                    buy_product_button.destroy()
-                    cancel_product_button.destroy()
-
-                buy_product_button = tk.Button(root, text="Αγορά", command=buy)
-                buy_product_button.pack()
-                cancel_product_button = tk.Button(root, text="Ακύρωση", command=cancel)
-                cancel_product_button.pack()
+                messageHandler("Το κέρμα έχει επικυρωθεί")
 
     # Create a drink menu with radio buttons
     drink_var = tk.StringVar(value="water1euro")
     drink_menu = tk.Frame(root)
     tk.Label(drink_menu, text="Menu").pack(anchor="c")
     tk.Label(drink_menu, text="Επιλέξτε ποτό:").pack(anchor="c")
-    tk.Radiobutton(drink_menu, text="Νερό (€1)", variable=drink_var, value="water1euro").pack(anchor="c")
-    tk.Radiobutton(drink_menu, text="Παγωμένο τσάι (€2)", variable=drink_var, value="icetea2euro").pack(anchor="c")
-    tk.Radiobutton(drink_menu, text="Λεμονάδα (€1.5)", variable=drink_var, value="lemonade1.5euro").pack(anchor="c")
+    water_radio_button = tk.Radiobutton(drink_menu, text="Νερό (€1)", variable=drink_var, state="normal", value="water1euro").pack(anchor="c")
+    icetea_radio_button = tk.Radiobutton(drink_menu, text="Παγωμένο τσάι (€2)", variable=drink_var, state="normal", value="icetea2euro").pack(anchor="c")
+    lemonade_radio_btn = tk.Radiobutton(drink_menu, text="Λεμονάδα (€1.5)", variable=drink_var, state="normal", value="lemonade1.5euro").pack(anchor="c")
     drink_menu.pack(anchor="c")
 
+    # Create a coin menu with radio buttons
+    coin_var = tk.StringVar(value="€")
+    coin_menu = tk.Frame(root)
+    tk.Label(coin_menu, text="Εισάγετε νόμισμα:").pack(anchor="w")
+    tk.Radiobutton(coin_menu, text="€1", variable=coin_var, value="1€").pack(anchor="c")
+    tk.Radiobutton(coin_menu, text="€2", variable=coin_var, value="2€").pack(anchor="c")
+    coin_menu.pack(anchor="c")
+
+    # create action buttons
     select_product_button = tk.Button(root, text="Επιλέξτε προϊόν", command=run_petri_net)
+    buy_product_button = tk.Button(root, text="Αγορά", state="disabled", command=buy)
+    cancel_product_button = tk.Button(root, text="Ακύρωση", state="disabled", command=cancel)
     select_product_button.pack()
+    buy_product_button.pack()
+    cancel_product_button.pack()
 
     root.mainloop()
