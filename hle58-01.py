@@ -1,5 +1,10 @@
 import tkinter as tk
 
+# Define the Petri net places
+place_product_place = False
+insert_coin_place = False
+validate_coin_place = False
+
 def place_product():
     """Place the product in the machine."""
     return True
@@ -75,10 +80,6 @@ def run_petri_net():
 
             messageHandler(f"Το προϊόν προστέθηκε και εισαγωγή νομίσματος: {coin_value}")
 
-    if place_product_place:
-        insert_coin_place = True
-        place_product_place = False
-
     if validate_coin_place:
         if transition2():
             canvas.itemconfigure(token_TK_P3, state="normal")
@@ -129,13 +130,8 @@ if __name__ == "__main__":
     line6 = canvas.create_line(700, 150, 700, 250, arrow=tk.LAST)
     # canvas.create_line(*arrow_coords, arrow='last', width=2)
 
-    # Define the Petri net places
-    place_product_place = False
-    insert_coin_place = False
-    validate_coin_place = False
-
     # Create a drink menu with radio buttons
-    drink_var = tk.StringVar(value="water1euro")
+    drink_var = tk.StringVar(value="null")
     drink_menu = tk.Frame(root)
     tk.Label(drink_menu, text="Menu").pack(anchor="c")
     tk.Label(drink_menu, text="Επιλέξτε ποτό:").pack(anchor="c")
@@ -148,7 +144,7 @@ if __name__ == "__main__":
     drink_menu.pack(anchor="c")
 
     # Create a coin menu with radio buttons
-    coin_var = tk.StringVar(value="€")
+    coin_var = tk.StringVar(value="null")
     coin_menu = tk.Frame(root)
     tk.Label(coin_menu, text="Εισάγετε νόμισμα:").pack(anchor="w")
     coin_one = tk.Radiobutton(coin_menu, text="€1", variable=coin_var, state="normal", value="1€")
