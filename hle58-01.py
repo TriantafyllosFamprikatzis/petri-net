@@ -12,14 +12,6 @@ def validate_coin():
     """Validate the inserted coin."""
     return True
 
-def dispense_product():
-    """Dispense the product."""
-    return True
-
-def return_change():
-    """Return any change to the customer."""
-    return True
-
 # Define the Petri net transitions
 def transition1():
     if place_product() and insert_coin():
@@ -28,10 +20,75 @@ def transition1():
         return False
 
 def transition2():
-    if validate_coin() and dispense_product():
+    if validate_coin():
         return True
     else:
         return False
+    
+def messageHandler(message):
+    petri_log_label = tk.Label(root, text=message)
+    petri_log_label.pack()
+
+def buy():
+    canvas.itemconfigure(token_TK_P3, state="hidden")
+    canvas.itemconfigure(token_TK_P5, state="normal")
+
+    buy_product_button.config(state="disabled")
+    cancel_product_button.config(state="disabled")
+
+    messageHandler("Το προϊόν έχει διανεμηθεί, η συναλλαγή ολοκληρώθηκε!")
+
+def cancel():
+    canvas.itemconfigure(token_TK_P3, state="hidden")
+    canvas.itemconfigure(token_TK_P4, state="normal")
+
+    buy_product_button.config(state="disabled")
+    cancel_product_button.config(state="disabled")
+
+    messageHandler("Συναλλαγή ακυρώθηκε!")
+
+def run_petri_net():
+    place_product_place = True
+
+    if place_product_place:
+        insert_coin_place = True
+        place_product_place = False
+
+    if insert_coin_place:
+        # Use the selected coin value
+        coin_value = coin_var.get()
+        if transition1():
+            canvas.itemconfigure(token_TK_P1, state="hidden")
+            canvas.itemconfigure(token_TK_P2, state="hidden")
+
+            water_radio_button.config(state="disabled")
+            icetea_radio_button.config(state="disabled")
+            lemonade_radio_btn.config(state="disabled")
+
+            coin_one.config(state="disabled")
+            coin_two.config(state="disabled")
+
+            select_product_button.config(state="disabled")
+            
+            validate_coin_place = True
+            insert_coin_place = False
+
+            messageHandler(f"Το προϊόν προστέθηκε και εισαγωγή νομίσματος: {coin_value}")
+
+    if place_product_place:
+        insert_coin_place = True
+        place_product_place = False
+
+    if validate_coin_place:
+        if transition2():
+            canvas.itemconfigure(token_TK_P3, state="normal")
+            
+            validate_coin_place = False
+            
+            buy_product_button.config(state="active")
+            cancel_product_button.config(state="active")
+
+            messageHandler("Το κέρμα έχει επικυρωθεί")
 
 if __name__ == "__main__":
     root = tk.Tk()
@@ -76,71 +133,6 @@ if __name__ == "__main__":
     place_product_place = False
     insert_coin_place = False
     validate_coin_place = False
-
-    def messageHandler(message):
-        petri_log_label = tk.Label(root, text=message)
-        petri_log_label.pack()
-
-    def buy():
-        canvas.itemconfigure(token_TK_P3, state="hidden")
-        canvas.itemconfigure(token_TK_P5, state="normal")
-
-        buy_product_button.config(state="disabled")
-        cancel_product_button.config(state="disabled")
-
-        messageHandler("Το προϊόν έχει διανεμηθεί, η συναλλαγή ολοκληρώθηκε!")
-
-    def cancel():
-        canvas.itemconfigure(token_TK_P3, state="hidden")
-        canvas.itemconfigure(token_TK_P4, state="normal")
-
-        buy_product_button.config(state="disabled")
-        cancel_product_button.config(state="disabled")
-
-        messageHandler("Συναλλαγή ακυρώθηκε!")
-
-    def run_petri_net():
-        place_product_place = True
-
-        if place_product_place:
-            insert_coin_place = True
-            place_product_place = False
-
-        if insert_coin_place:
-            # Use the selected coin value
-            coin_value = coin_var.get()
-            if transition1():
-                canvas.itemconfigure(token_TK_P1, state="hidden")
-                canvas.itemconfigure(token_TK_P2, state="hidden")
-
-                water_radio_button.config(state="disabled")
-                icetea_radio_button.config(state="disabled")
-                lemonade_radio_btn.config(state="disabled")
-
-                coin_one.config(state="disabled")
-                coin_two.config(state="disabled")
-
-                select_product_button.config(state="disabled")
-                
-                validate_coin_place = True
-                insert_coin_place = False
-
-                messageHandler(f"Το προϊόν προστέθηκε και εισαγωγή νομίσματος: {coin_value}")
-
-        if place_product_place:
-            insert_coin_place = True
-            place_product_place = False
-
-        if validate_coin_place:
-            if transition2():
-                canvas.itemconfigure(token_TK_P3, state="normal")
-                
-                validate_coin_place = False
-                
-                buy_product_button.config(state="active")
-                cancel_product_button.config(state="active")
-
-                messageHandler("Το κέρμα έχει επικυρωθεί")
 
     # Create a drink menu with radio buttons
     drink_var = tk.StringVar(value="water1euro")
