@@ -101,7 +101,6 @@ if __name__ == "__main__":
 
     def run_petri_net():
         place_product_place = True
-        select_product_button.config(state="disabled")
 
         if place_product_place:
             insert_coin_place = True
@@ -113,6 +112,15 @@ if __name__ == "__main__":
             if transition1():
                 canvas.itemconfigure(token_TK_P1, state="hidden")
                 canvas.itemconfigure(token_TK_P2, state="hidden")
+
+                water_radio_button.config(state="disabled")
+                icetea_radio_button.config(state="disabled")
+                lemonade_radio_btn.config(state="disabled")
+
+                coin_one.config(state="disabled")
+                coin_two.config(state="disabled")
+
+                select_product_button.config(state="disabled")
                 
                 validate_coin_place = True
                 insert_coin_place = False
@@ -122,16 +130,6 @@ if __name__ == "__main__":
         if place_product_place:
             insert_coin_place = True
             place_product_place = False
-
-        if insert_coin_place:
-            if transition1():
-                canvas.itemconfigure(token_TK_P1, state="hidden")
-                canvas.itemconfigure(token_TK_P2, state="hidden")
-
-                validate_coin_place = True
-                insert_coin_place = False
-
-                messageHandler("Το προϊόν προστέθηκε και έγινε εισαγωγή νομίσματος.")
 
         if validate_coin_place:
             if transition2():
@@ -149,17 +147,22 @@ if __name__ == "__main__":
     drink_menu = tk.Frame(root)
     tk.Label(drink_menu, text="Menu").pack(anchor="c")
     tk.Label(drink_menu, text="Επιλέξτε ποτό:").pack(anchor="c")
-    water_radio_button = tk.Radiobutton(drink_menu, text="Νερό (€1)", variable=drink_var, state="normal", value="water1euro").pack(anchor="c")
-    icetea_radio_button = tk.Radiobutton(drink_menu, text="Παγωμένο τσάι (€2)", variable=drink_var, state="normal", value="icetea2euro").pack(anchor="c")
-    lemonade_radio_btn = tk.Radiobutton(drink_menu, text="Λεμονάδα (€1.5)", variable=drink_var, state="normal", value="lemonade1.5euro").pack(anchor="c")
+    water_radio_button = tk.Radiobutton(drink_menu, text="Νερό (€1)", variable=drink_var, state="normal", value="water1euro")
+    icetea_radio_button = tk.Radiobutton(drink_menu, text="Παγωμένο τσάι (€2)", variable=drink_var, state="normal", value="icetea2euro")
+    lemonade_radio_btn = tk.Radiobutton(drink_menu, text="Λεμονάδα (€1.5)", variable=drink_var, state="normal", value="lemonade1.5euro")
+    water_radio_button.pack(anchor="c")
+    icetea_radio_button.pack(anchor="c")
+    lemonade_radio_btn.pack(anchor="c")
     drink_menu.pack(anchor="c")
 
     # Create a coin menu with radio buttons
     coin_var = tk.StringVar(value="€")
     coin_menu = tk.Frame(root)
     tk.Label(coin_menu, text="Εισάγετε νόμισμα:").pack(anchor="w")
-    tk.Radiobutton(coin_menu, text="€1", variable=coin_var, value="1€").pack(anchor="c")
-    tk.Radiobutton(coin_menu, text="€2", variable=coin_var, value="2€").pack(anchor="c")
+    coin_one = tk.Radiobutton(coin_menu, text="€1", variable=coin_var, state="normal", value="1€")
+    coin_two = tk.Radiobutton(coin_menu, text="€2", variable=coin_var, state="normal", value="2€")
+    coin_one.pack(anchor="c")
+    coin_two.pack(anchor="c")
     coin_menu.pack(anchor="c")
 
     # create action buttons
