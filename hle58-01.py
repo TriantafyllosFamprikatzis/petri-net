@@ -1,21 +1,25 @@
 import tkinter as tk
 
-# Define the Petri net places
-place_product_place = False
-insert_coin_place = False
-validate_coin_place = False
-
 def place_product():
     """Place the product in the machine."""
-    return True
+    if drink_var.get() == "null":
+        return False
+    else:
+        return True
 
 def insert_coin():
     """Insert a coin into the machine."""
-    return True
+    if coin_var.get() == "null":
+        return False
+    else:
+        return True
 
 def validate_coin():
-    """Validate the inserted coin."""
-    return True
+    """Validate the inserted coin and product with the correct values"""
+    if coin_var.get() == "1€" or coin_var.get() == "2€":
+        return True
+    else:
+        return False
 
 # Define the Petri net transitions
 def transition1():
@@ -25,7 +29,7 @@ def transition1():
         return False
 
 def transition2():
-    if validate_coin():
+    if transition1() and validate_coin():
         return True
     else:
         return False
@@ -53,43 +57,31 @@ def cancel():
     messageHandler("Συναλλαγή ακυρώθηκε!")
 
 def run_petri_net():
-    place_product_place = True
-
-    if place_product_place:
-        insert_coin_place = True
-        place_product_place = False
-
-    if insert_coin_place:
+    if transition1():
         # Use the selected coin value
         coin_value = coin_var.get()
-        if transition1():
-            canvas.itemconfigure(token_TK_P1, state="hidden")
-            canvas.itemconfigure(token_TK_P2, state="hidden")
 
-            water_radio_button.config(state="disabled")
-            icetea_radio_button.config(state="disabled")
-            lemonade_radio_btn.config(state="disabled")
+        canvas.itemconfigure(token_TK_P1, state="hidden")
+        canvas.itemconfigure(token_TK_P2, state="hidden")
 
-            coin_one.config(state="disabled")
-            coin_two.config(state="disabled")
+        water_radio_button.config(state="disabled")
+        icetea_radio_button.config(state="disabled")
+        lemonade_radio_btn.config(state="disabled")
 
-            select_product_button.config(state="disabled")
-            
-            validate_coin_place = True
-            insert_coin_place = False
+        coin_one.config(state="disabled")
+        coin_two.config(state="disabled")
 
-            messageHandler(f"Το προϊόν προστέθηκε και εισαγωγή νομίσματος: {coin_value}")
+        select_product_button.config(state="disabled")
 
-    if validate_coin_place:
-        if transition2():
-            canvas.itemconfigure(token_TK_P3, state="normal")
-            
-            validate_coin_place = False
-            
-            buy_product_button.config(state="active")
-            cancel_product_button.config(state="active")
+        messageHandler(f"Το προϊόν προστέθηκε και εισαγωγή νομίσματος: {coin_value}")
 
-            messageHandler("Το κέρμα έχει επικυρωθεί")
+    if transition2():
+        canvas.itemconfigure(token_TK_P3, state="normal")
+                
+        buy_product_button.config(state="active")
+        cancel_product_button.config(state="active")
+
+        messageHandler("Το κέρμα έχει επικυρωθεί")
 
 if __name__ == "__main__":
     root = tk.Tk()
@@ -97,22 +89,25 @@ if __name__ == "__main__":
     canvas.pack()
     root.title("Petri net Αυτόματος Πωλητής")  
 
-    # create GUI places 
+    # create GUI places and texts
     place_product_TK = canvas.create_oval(50, 50, 150, 150, outline='black', width=2)
+    place_coin_TK = canvas.create_oval(250, 250, 350, 350, outline='black', width=2)
+    place_validate_coin_TK = canvas.create_oval(450, 50, 550, 150, outline='black', width=2)
+    place_cancel_TK = canvas.create_oval(650, 250, 750, 350, outline='black', width=2)
+    place_complete_TK = canvas.create_oval(850, 50, 950, 150, outline='black', width=2)
+
     text1 = canvas.create_text(100, 100, text='P1')
-    place_storage_TK = canvas.create_oval(250, 250, 350, 350, outline='black', width=2)
     text2 = canvas.create_text(300, 300, text='P2')
-    insert_coin_TK = canvas.create_rectangle(280, 50, 320, 150, outline='black', width=2)
-    text3 = canvas.create_text(300, 100, text='T1')
-    validate_coin_place_TK = canvas.create_oval(450, 50, 550, 150, outline='black', width=2)
     text4 = canvas.create_text(500, 100, text='P3')
-    dispense_product_place_TK = canvas.create_rectangle(680, 50, 720, 150, outline='black', width=2)
-    text5 = canvas.create_text(700, 100, text='T2')
-    abort_TK = return_change_TK = canvas.create_oval(650, 250, 750, 350, outline='black', width=2)
     text6 = canvas.create_text(700, 300, text='P4')
-    return_change_TK = canvas.create_oval(850, 50, 950, 150, outline='black', width=2)
     text7 = canvas.create_text(900, 100, text='P5')
 
+    # create GUI transitions
+    insert_coin_TK = canvas.create_rectangle(280, 50, 320, 150, outline='black', width=2)
+    text3 = canvas.create_text(300, 100, text='T1')
+    dispense_product_place_TK = canvas.create_rectangle(680, 50, 720, 150, outline='black', width=2)
+    text5 = canvas.create_text(700, 100, text='T2')
+    
     # create GUI token
     token_TK_P1 = canvas.create_oval(75, 75, 125, 125, fill='black', state="normal")
     token_TK_P2 = canvas.create_oval(275, 275, 325, 325, fill='black', state="normal")
@@ -135,9 +130,9 @@ if __name__ == "__main__":
     drink_menu = tk.Frame(root)
     tk.Label(drink_menu, text="Menu").pack(anchor="c")
     tk.Label(drink_menu, text="Επιλέξτε ποτό:").pack(anchor="c")
-    water_radio_button = tk.Radiobutton(drink_menu, text="Νερό (€1)", variable=drink_var, state="normal", value="water1euro")
-    icetea_radio_button = tk.Radiobutton(drink_menu, text="Παγωμένο τσάι (€2)", variable=drink_var, state="normal", value="icetea2euro")
-    lemonade_radio_btn = tk.Radiobutton(drink_menu, text="Λεμονάδα (€1.5)", variable=drink_var, state="normal", value="lemonade1.5euro")
+    water_radio_button = tk.Radiobutton(drink_menu, text="Νερό (€1)", variable=drink_var, state="normal", value="water")
+    icetea_radio_button = tk.Radiobutton(drink_menu, text="Παγωμένο τσάι (€2)", variable=drink_var, state="normal", value="icetea")
+    lemonade_radio_btn = tk.Radiobutton(drink_menu, text="Λεμονάδα (€1.5)", variable=drink_var, state="normal", value="lemonade")
     water_radio_button.pack(anchor="c")
     icetea_radio_button.pack(anchor="c")
     lemonade_radio_btn.pack(anchor="c")
