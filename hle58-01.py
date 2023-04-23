@@ -91,37 +91,37 @@ if __name__ == "__main__":
 
     # create GUI places and texts
     place_product_TK = canvas.create_oval(30, 70, 90, 130, outline='black', width=2)
-    place_coin_TK = canvas.create_oval(215, 270, 275, 330, outline='black', width=2)
+    place_coin_TK = canvas.create_oval(155, 230, 215, 290, outline='black', width=2)
     place_validate_coin_TK = canvas.create_oval(470, 70, 530, 130, outline='black', width=2)
     place_cancel_TK = canvas.create_oval(1070, 270, 1130, 330, outline='black', width=2)
     place_complete_TK = canvas.create_oval(1260, 70, 1320, 130, outline='black', width=2)
 
     text1 = canvas.create_text(60, 100, text='P1')
-    text2 = canvas.create_text(245, 300, text='P2')
+    text2 = canvas.create_text(185, 260, text='P2')
     text4 = canvas.create_text(500, 100, text='P3')
     text6 = canvas.create_text(1100, 300, text='P4')
     text7 = canvas.create_text(1290, 100, text='P5')
 
     # create GUI transitions
-    insert_coin_TK = canvas.create_rectangle(230, 60, 250, 140, outline='black', width=2)
-    text3 = canvas.create_text(240, 100, text='T1')
+    insert_coin_TK = canvas.create_rectangle(175, 60, 195, 140, outline='black', width=2)
+    text3 = canvas.create_text(185, 100, text='T1')
     dispense_product_place_TK = canvas.create_rectangle(1090, 60, 1110, 140, outline='black', width=2)
     text5 = canvas.create_text(1100, 100, text='T2')
     
     # create GUI token
     token_TK_P1 = canvas.create_oval(50, 90, 70, 110, fill='black', state="normal")
-    token_TK_P2 = canvas.create_oval(235, 290, 255, 310, fill='black', state="normal")
+    token_TK_P2 = canvas.create_oval(175, 250, 195, 270, fill='black', state="normal")
     token_TK_P3 = canvas.create_oval(490, 90, 510, 110, fill="black", state="hidden")
     token_TK_P4 = canvas.create_oval(1090, 290, 1110, 310, fill="black", state="hidden")
     token_TK_P5 = canvas.create_oval(1280, 90, 1300, 110, fill="black", state="hidden")
 
     # create GUI arrows
-    line1 = canvas.create_line(95, 100, 225, 100, arrow=tk.LAST)
-    line2 = canvas.create_line(255, 100, 385, 100, arrow=tk.LAST)
-    line3 = canvas.create_line(950, 100, 1080, 100, arrow=tk.LAST)
-    line4 = canvas.create_line(1120, 100, 1250, 100, arrow=tk.LAST)
-    line5 = canvas.create_line(240, 250, 240, 150, arrow=tk.LAST)
-    line6 = canvas.create_line(1100, 150, 1100, 250, arrow=tk.LAST)
+    line1 = canvas.create_line(95, 100, 170, 100, arrow=tk.LAST)
+    line2 = canvas.create_line(200, 100, 275, 100, arrow=tk.LAST)
+    line3 = canvas.create_line(950, 100, 1025, 100, arrow=tk.LAST)
+    line4 = canvas.create_line(1120, 100, 1195, 100, arrow=tk.LAST)
+    line5 = canvas.create_line(185, 225, 185, 145, arrow=tk.LAST)
+    line6 = canvas.create_line(1100, 150, 1100, 220, arrow=tk.LAST)
 
     # Create a drink menu with radio buttons
     drink_var = tk.StringVar(value="null")
