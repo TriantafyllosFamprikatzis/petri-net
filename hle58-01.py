@@ -16,7 +16,7 @@ def insert_coin():
 
 def validate_coin():
     """Validate the inserted coin and product with the correct values"""
-    if coin_var.get() == "1€" or coin_var.get() == "2€":
+    if coin_var.get() == "0.10€" or coin_var.get() == "0.20€" or coin_var.get() == "0.50€" or coin_var.get() == "1€" or coin_var.get() == "2€":
         return True
     else:
         return False
@@ -33,14 +33,26 @@ def transition2():
         return True
     else:
         return False
+
+def transition3():
+    if transition2() and validate_coin():
+        return True
+    else:
+        return False
+
+def transition4():
+    if transition3() and validate_coin():
+        return True
+    else:
+        return False
     
 def messageHandler(message):
     petri_log_label = tk.Label(root, text=message)
     petri_log_label.pack()
 
 def buy():
-    canvas.itemconfigure(token_TK_P3, state="hidden")
-    canvas.itemconfigure(token_TK_P5, state="normal")
+    canvas.itemconfigure(token_TK_P8, state="hidden")
+    canvas.itemconfigure(token_TK_P9, state="normal")
 
     buy_product_button.config(state="disabled")
     cancel_product_button.config(state="disabled")
@@ -48,8 +60,8 @@ def buy():
     messageHandler("Το προϊόν έχει διανεμηθεί, η συναλλαγή ολοκληρώθηκε!")
 
 def cancel():
-    canvas.itemconfigure(token_TK_P3, state="hidden")
-    canvas.itemconfigure(token_TK_P4, state="normal")
+    canvas.itemconfigure(token_TK_P8, state="hidden")
+    canvas.itemconfigure(token_TK_P10, state="normal")
 
     buy_product_button.config(state="disabled")
     cancel_product_button.config(state="disabled")
@@ -57,35 +69,125 @@ def cancel():
     messageHandler("Συναλλαγή ακυρώθηκε!")
 
 def run_petri_net():
+    
     if transition1():
-        # Use the selected coin value
-        coin_value = coin_var.get()
-
+        
         canvas.itemconfigure(token_TK_P1, state="hidden")
         canvas.itemconfigure(token_TK_P2, state="hidden")
-
+        canvas.itemconfigure(token_TK_P3, state="normal")
         water_radio_button.config(state="disabled")
         icetea_radio_button.config(state="disabled")
         lemonade_radio_btn.config(state="disabled")
 
-        coin_one.config(state="disabled")
-        coin_two.config(state="disabled")
-
         select_product_button.config(state="disabled")
 
-        messageHandler(f"Το προϊόν προστέθηκε και εισαγωγή νομίσματος: {coin_value}")
+        messageHandler(f"Το προϊόν προστέθηκε. Παρακαλώ εισαγετε νόμισμα")    
 
     if transition2():
-        canvas.itemconfigure(token_TK_P3, state="normal")
-                
+        # Use the selected coin value
+        deposit_value = 0
+        coin_trap_value = 0
+        coin_value = coin_var.get()
+        coin_small_10.config(state="active")
+        coin_small_20.config(state="active")
+        coin_small_50.config(state="active")
+        coin_one.config(state="active")
+        coin_two.config(state="active")
+        transition2() is False
+        if (coin_value == "0.10€"):
+            deposit_value = 10
+            transition2() is True
+        elif (coin_value == "0.20€"):
+            deposit_value = 20
+            transition2() is True
+        elif (coin_value == "0.20€"):
+            deposit_value = 50
+            transition3() is True
+        coin_trap_value = coin_trap_value + coin_trap_value
+        insert_coin_button.config(state="active")
+        messageHandler(f"{coin_value}")
+        messageHandler(coin_trap_value/400)
+        if (deposit_value == 20):
+            canvas.itemconfigure(token_TK_P1, state="hidden")
+            canvas.itemconfigure(token_TK_P2, state="hidden")
+            canvas.itemconfigure(token_TK_P3, state="hidden")
+            canvas.itemconfigure(token_TK_P4, state="normal")
+            
+        elif (deposit_value == 10):
+            canvas.itemconfigure(token_TK_P1, state="hidden")
+            canvas.itemconfigure(token_TK_P2, state="hidden")
+            canvas.itemconfigure(token_TK_P3, state="hidden")
+            canvas.itemconfigure(token_TK_P4, state="hidden")
+            canvas.itemconfigure(token_TK_P5, state="normal")     
+        
+        
+
+    if transition3() and insert_coin():
+        # Use the selected coin value
+        coin_small_10.config(state="active")
+        coin_small_20.config(state="active")
+        coin_small_50.config(state="active")
+        coin_one.config(state="active")
+        coin_two.config(state="active")
+        if (coin_value == "0.10€"):
+            deposit_value = 10
+        else:
+            deposit_value = 20
+        deposit_value += deposit_value
+        insert_coin_button.config(state="active")
+        messageHandler(f"{coin_value}")
+        messageHandler(deposit_value/400)
+
+        if (deposit_value == 30):
+            canvas.itemconfigure(token_TK_P1, state="hidden")
+            canvas.itemconfigure(token_TK_P2, state="hidden")
+            canvas.itemconfigure(token_TK_P3, state="hidden")
+            canvas.itemconfigure(token_TK_P4, state="hidden")
+            canvas.itemconfigure(token_TK_P5, state="hidden")
+            canvas.itemconfigure(token_TK_P6, state="normal")
+        elif (deposit_value == 40):
+            canvas.itemconfigure(token_TK_P1, state="hidden")
+            canvas.itemconfigure(token_TK_P2, state="hidden")
+            canvas.itemconfigure(token_TK_P3, state="hidden")
+            canvas.itemconfigure(token_TK_P4, state="hidden")
+            canvas.itemconfigure(token_TK_P5, state="hidden")
+            canvas.itemconfigure(token_TK_P6, state="hidden")
+            canvas.itemconfigure(token_TK_P7, state="normal")
+
+    if transition4() and insert_coin():
+        # Use the selected coin value
+        coin_small_10.config(state="active")
+        coin_small_20.config(state="active")
+        coin_small_50.config(state="active")
+        coin_one.config(state="active")
+        coin_two.config(state="active")
+        if (coin_value == "0.10€"):
+            deposit_value = 10
+        else:
+            deposit_value = 20
+        deposit_value += deposit_value
+        insert_coin_button.config(state="active")
+        messageHandler(f"{coin_value}")
+        messageHandler(deposit_value/400)
+        if (deposit_value >= 50):
+            canvas.itemconfigure(token_TK_P1, state="hidden")
+            canvas.itemconfigure(token_TK_P2, state="hidden")
+            canvas.itemconfigure(token_TK_P3, state="hidden")
+            canvas.itemconfigure(token_TK_P4, state="hidden")
+            canvas.itemconfigure(token_TK_P5, state="hidden")
+            canvas.itemconfigure(token_TK_P6, state="hidden")
+            canvas.itemconfigure(token_TK_P7, state="hidden")
+            canvas.itemconfigure(token_TK_P8, state="normal")
+
+        insert_coin_button.config(state="disabled")
         buy_product_button.config(state="active")
         cancel_product_button.config(state="active")
 
-        messageHandler("Το κέρμα έχει επικυρωθεί")
+        messageHandler("Ολοκλήρωση Αγοράς ή Ακύρωση.")
 
 if __name__ == "__main__":
     root = tk.Tk()
-    canvas = tk.Canvas(root, width=1350, height=600)
+    canvas = tk.Canvas(root, width=1350, height=200)
     canvas.pack()
     root.title("Petri net Αυτόματος Πωλητής")  
 
@@ -136,7 +238,6 @@ if __name__ == "__main__":
     dispense_product_place_TK = canvas.create_rectangle(840, 80, 870, 100, outline='black', width=2)
     textproduct = canvas.create_text(855, 90, text='T11')
     
-    
     # create GUI token
     token_TK_P1 = canvas.create_oval(40, 85, 50, 95, fill='black', state="normal") 
     token_TK_P2 = canvas.create_oval(130, 170, 140, 180, fill='black', state="normal")
@@ -149,9 +250,7 @@ if __name__ == "__main__":
     token_TK_P9 = canvas.create_oval(940, 85, 950, 95, fill="black", state="hidden")
     token_TK_P10 = canvas.create_oval(850, 170, 860, 180, fill="black", state="hidden")
 
-
     # create GUI arrows
-    
     line = canvas.create_line(70, 90, 110, 90, arrow=tk.LAST)#p1 - t1
     line = canvas.create_line(160, 90, 200, 90, arrow=tk.LAST) #t1 - p3
     line = canvas.create_line(135, 150, 135, 110, arrow=tk.LAST) #p2 - t1
@@ -176,6 +275,7 @@ if __name__ == "__main__":
     line = canvas.create_line(790, 90, 830, 90, arrow=tk.LAST)#p8-t11
     line = canvas.create_line(880, 90, 920, 90, arrow=tk.LAST)#t11-p9
     line = canvas.create_line(855, 110, 855, 150, arrow=tk.LAST)#t11-p10
+
     # Create a drink menu with radio buttons
     drink_var = tk.StringVar(value="null")
     drink_menu = tk.Frame(root)
@@ -193,18 +293,27 @@ if __name__ == "__main__":
     coin_var = tk.StringVar(value="null")
     coin_menu = tk.Frame(root)
     tk.Label(coin_menu, text="Εισάγετε νόμισμα:").pack(anchor="w")
+    coin_small_10 = tk.Radiobutton(coin_menu, text="€0.10", variable=coin_var, state="normal", value="0.10€")
+    coin_small_20 = tk.Radiobutton(coin_menu, text="€0.20", variable=coin_var, state="normal", value="0.20€")
+    coin_small_50 = tk.Radiobutton(coin_menu, text="€0.50", variable=coin_var, state="normal", value="0.50€")
     coin_one = tk.Radiobutton(coin_menu, text="€1", variable=coin_var, state="normal", value="1€")
     coin_two = tk.Radiobutton(coin_menu, text="€2", variable=coin_var, state="normal", value="2€")
+    coin_small_10.pack(anchor="c")
+    coin_small_20.pack(anchor="c")
+    coin_small_50.pack(anchor="c")
     coin_one.pack(anchor="c")
     coin_two.pack(anchor="c")
     coin_menu.pack(anchor="c")
 
     # create action buttons
     select_product_button = tk.Button(root, text="Επιλέξτε προϊόν", command=run_petri_net)
+    insert_coin_button = tk.Button(root, text="Εισάγετε κέρμα", state="disabled", command=run_petri_net)
     buy_product_button = tk.Button(root, text="Αγορά", state="disabled", command=buy)
     cancel_product_button = tk.Button(root, text="Ακύρωση", state="disabled", command=cancel)
+    insert_coin_button.pack()
     select_product_button.pack()
     buy_product_button.pack()
     cancel_product_button.pack()
 
     root.mainloop()
+
