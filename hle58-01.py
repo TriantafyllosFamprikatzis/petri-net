@@ -89,7 +89,7 @@ if __name__ == "__main__":
     canvas.pack()
     root.title("Petri net Αυτόματος Πωλητής")  
 
-    # create GUI places and texts
+        # create GUI places and texts
     place_product_TK = canvas.create_oval(30, 75, 60, 105, outline='black', width=2)#p1
     place_coin_TK = canvas.create_oval(120, 160, 150, 190, outline='black', width=2)#p2
     place_validate_coin_TK = canvas.create_oval(210, 75, 240, 105, outline='black', width=2)#p3
@@ -114,7 +114,10 @@ if __name__ == "__main__":
 
     # create GUI transitions
     insert_coin_TK = canvas.create_rectangle(120, 80, 150, 100, outline='black', width=2)
-    textcoin = canvas.create_text(135, 90, text='T1')
+    textcoin = canvas.create_text(135, 90, text='T0')
+    #
+    T1_TK = canvas.create_rectangle(480, 165, 510, 185, outline='black', width=2)#+50
+    textt1 = canvas.create_text(495, 175, text='T1')
     T2_TK = canvas.create_rectangle(300, 30, 330, 50, outline='black', width=2)#+10
     textt2 = canvas.create_text(315, 40, text='T2')
     T3_TK = canvas.create_rectangle(300, 130, 330, 150, outline='black', width=2)#+20
@@ -136,6 +139,48 @@ if __name__ == "__main__":
     dispense_product_place_TK = canvas.create_rectangle(840, 80, 870, 100, outline='black', width=2)
     textproduct = canvas.create_text(855, 90, text='T11')
     
+    
+    # create GUI token
+    token_TK_P1 = canvas.create_oval(40, 85, 50, 95, fill='black', state="normal") 
+    token_TK_P2 = canvas.create_oval(130, 170, 140, 180, fill='black', state="normal")
+    token_TK_P3 = canvas.create_oval(220, 85, 230, 95, fill="black", state="hidden")
+    token_TK_P4 = canvas.create_oval(400, 35, 410, 45, fill="black", state="hidden")
+    token_TK_P5 = canvas.create_oval(400, 135, 410, 145, fill="black", state="hidden")
+    token_TK_P6 = canvas.create_oval(580, 35, 590, 45, fill="black", state="hidden")
+    token_TK_P7 = canvas.create_oval(580, 135, 590, 145, fill="black", state="hidden")
+    token_TK_P8 = canvas.create_oval(760, 85, 770, 95, fill="black", state="hidden")
+    token_TK_P9 = canvas.create_oval(940, 85, 950, 95, fill="black", state="hidden")
+    token_TK_P10 = canvas.create_oval(850, 170, 860, 180, fill="black", state="hidden")
+
+
+    # create GUI arrows
+    
+    line = canvas.create_line(70, 90, 110, 90, arrow=tk.LAST)#p1 - t0
+    line = canvas.create_line(160, 90, 200, 90, arrow=tk.LAST) #t0 - p3
+    line = canvas.create_line(135, 150, 135, 110, arrow=tk.LAST) #p2 - t0
+    line = canvas.create_line(225, 115, 225, 175, 470, 175, arrow=tk.LAST)#p3-t1 830
+    line = canvas.create_line(520, 175, 830, 175, arrow=tk.LAST)#t1-p10 830
+    line = canvas.create_line(250, 80, 290, 50, arrow=tk.LAST)#p3-t2
+    line = canvas.create_line(250, 100, 290, 130, arrow=tk.LAST)#p3-t3
+    line = canvas.create_line(340, 40, 380, 40, arrow=tk.LAST)#t2-p4
+    line = canvas.create_line(430, 40, 470, 40, arrow=tk.LAST)#p4-t5
+    line = canvas.create_line(340, 140, 380, 140, arrow=tk.LAST)#t3-p5
+    line = canvas.create_line(405, 60, 405, 75, arrow=tk.LAST)#p4-t4
+    line = canvas.create_line(405, 105, 405, 120, arrow=tk.LAST)#t4-p5
+    line = canvas.create_line(520, 40, 560, 40, arrow=tk.LAST)#t5-p6
+    line = canvas.create_line(430, 140, 470, 140, arrow=tk.LAST)#p5-t7
+    line = canvas.create_line(520, 140, 560, 140, arrow=tk.LAST)#t7-p7
+    line = canvas.create_line(585, 60, 585, 75, arrow=tk.LAST)#p6-t8
+    line = canvas.create_line(585, 105, 585, 120, arrow=tk.LAST)#t8-p7
+    line = canvas.create_line(430, 130, 470, 100, arrow=tk.LAST)#p5-t6
+    line = canvas.create_line(515, 90, 555, 60, arrow=tk.LAST)#t6-p6
+    line = canvas.create_line(610, 40, 650, 40, arrow=tk.LAST)#p6-t9 
+    line = canvas.create_line(610, 140, 650, 140, arrow=tk.LAST)#p7-t10
+    line = canvas.create_line(700, 40, 740, 70, arrow=tk.LAST)#t9-p8
+    line = canvas.create_line(700, 140, 740, 110, arrow=tk.LAST)#t10-p8
+    line = canvas.create_line(790, 90, 830, 90, arrow=tk.LAST)#p8-t11
+    line = canvas.create_line(880, 90, 920, 90, arrow=tk.LAST)#t11-p9
+    line = canvas.create_line(855, 110, 855, 150, arrow=tk.LAST)#t11-p10
     
     # create GUI token
     token_TK_P1 = canvas.create_oval(40, 85, 50, 95, fill='black', state="normal") 
@@ -176,6 +221,7 @@ if __name__ == "__main__":
     line = canvas.create_line(790, 90, 830, 90, arrow=tk.LAST)#p8-t11
     line = canvas.create_line(880, 90, 920, 90, arrow=tk.LAST)#t11-p9
     line = canvas.create_line(855, 110, 855, 150, arrow=tk.LAST)#t11-p10
+    
     # Create a drink menu with radio buttons
     drink_var = tk.StringVar(value="null")
     drink_menu = tk.Frame(root)
