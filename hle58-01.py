@@ -1,87 +1,108 @@
+
+
+# TODO 1 => Cancel button must reset all states to 0
+# TODO 2 (IN_PROGRESS BY ALKIS) => use a global value to calculate and update on each selection
+# TODO 3 => Make the rest of the transitions 
+# TODO 4 => Use or remove entirely the buy button and transition
+# TODO 5 => Fix naming in tokens and places, for example token 0 and 2 does not exist
+# TODO 6 => Improve design in tkinter
+# TODO 7 => Create a README documentation for usage and exmplanation what P,T do and represent
+# TODO 8 => Complete the modeling for IceTea and Lemonade
+
+
 import tkinter as tk
-
-def place_product():
-    """Place the product in the machine."""
-    if drink_var.get() == "null":
-        return False
-    else:
-        return True
-
-def insert_coin():
-    """Insert a coin into the machine."""
-    if coin_var.get() == "null":
-        return False
-    else:
-        return True
-
-def validate_coin():
-    """Validate the inserted coin and product with the correct values"""
-    if coin_var.get() == "1€" or coin_var.get() == "2€":
-        return True
-    else:
-        return False
+# Global Variables
+canRunTransition0 = True
+currentValue = 0
 
 # Define the Petri net transitions
-def transition1():
-    if place_product() and insert_coin():
+def transition0():
+    if drink_var.get() != "null":
         return True
     else:
         return False
 
-def transition2():
-    if transition1() and validate_coin():
+def transition1():
+    if int(coin_var.get()) == 50:
         return True
     else:
         return False
     
+def transition2():
+    if int(coin_var.get()) == 10:
+        return True
+    else:
+        return False
+    
+# Helpers
 def messageHandler(message):
     petri_log_label = tk.Label(root, text=message)
     petri_log_label.pack()
 
-def buy():
-    canvas.itemconfigure(token_TK_P3, state="hidden")
-    canvas.itemconfigure(token_TK_P5, state="normal")
+def tokenHandler(activeToken):
+    #Κρύβει όλα τα προηγούμενα τόκεν
+    tokensList = ["token_TK_P1", "token_TK_P3", "token_TK_P4", "token_TK_P5", "token_TK_P6", "token_TK_P7", "token_TK_P8", "token_TK_P9", "token_TK_P10"]
+    for token in tokensList:
+        if token != activeToken:
+            canvas.itemconfig(eval(token), state="hidden")
+    
+# def buy():
+#     canvas.itemconfigure(token_TK_P3, state="hidden")
+#     canvas.itemconfigure(token_TK_P5, state="normal")
 
-    buy_product_button.config(state="disabled")
-    cancel_product_button.config(state="disabled")
+#     buy_product_button.config(state="disabled")
+#     cancel_product_button.config(state="disabled")
 
-    messageHandler("Το προϊόν έχει διανεμηθεί, η συναλλαγή ολοκληρώθηκε!")
+#     messageHandler("Το προϊόν έχει διανεμηθεί, η συναλλαγή ολοκληρώθηκε!")
 
-def cancel():
-    canvas.itemconfigure(token_TK_P3, state="hidden")
-    canvas.itemconfigure(token_TK_P4, state="normal")
+# def cancel():
+#     canvas.itemconfigure(token_TK_P3, state="hidden")
+#     canvas.itemconfigure(token_TK_P4, state="normal")
 
-    buy_product_button.config(state="disabled")
-    cancel_product_button.config(state="disabled")
+#     buy_product_button.config(state="disabled")
+#     cancel_product_button.config(state="disabled")
 
-    messageHandler("Συναλλαγή ακυρώθηκε!")
+#     messageHandler("Συναλλαγή ακυρώθηκε!")
 
 def run_petri_net():
-    if transition1():
-        # Use the selected coin value
-        coin_value = coin_var.get()
+    global canRunTransition0, currentValue
 
+    if transition0() and canRunTransition0:
         canvas.itemconfigure(token_TK_P1, state="hidden")
-        canvas.itemconfigure(token_TK_P2, state="hidden")
+        canvas.itemconfigure(token_TK_P3, state="normal")
 
         water_radio_button.config(state="disabled")
         icetea_radio_button.config(state="disabled")
         lemonade_radio_btn.config(state="disabled")
 
-        coin_one.config(state="disabled")
-        coin_two.config(state="disabled")
+        coin_small_10.config(state="normal")
+        coin_small_20.config(state="normal")
+        coin_small_50.config(state="normal")
+        coin_one.config(state="normal")
+        coin_two.config(state="normal")
 
+        insert_coin_button.config(state="normal")
         select_product_button.config(state="disabled")
 
-        messageHandler(f"Το προϊόν προστέθηκε και εισαγωγή νομίσματος: {coin_value}")
+        messageHandler("Το προϊόν προστέθηκε:")
+        canRunTransition0 = False
+
+    if transition1():
+        # coin_value = coin_var.get()
+        canvas.itemconfigure(token_TK_P10, state="normal")
+        tokenHandler("token_TK_P10")
+
+        # buy_product_button.config(state="active")
+        # cancel_product_button.config(state="active")
+        messageHandler(f"Εισαγωγή νομίσματος: {currentValue}, το ποσό συμπληρώθηκε")
 
     if transition2():
-        canvas.itemconfigure(token_TK_P3, state="normal")
-                
-        buy_product_button.config(state="active")
-        cancel_product_button.config(state="active")
+        # coin_value = coin_var.get()
+        canvas.itemconfigure(token_TK_P4, state="normal")
+        tokenHandler("token_TK_P4")
 
-        messageHandler("Το κέρμα έχει επικυρωθεί")
+        messageHandler(f"Εισαγωγή νομίσματος: {currentValue}, υπολείπονται ακόμη Χ")
+
 
 if __name__ == "__main__":
     root = tk.Tk()
@@ -90,9 +111,8 @@ if __name__ == "__main__":
     root.title("Petri net Αυτόματος Πωλητής")  
 
     # create GUI places and texts
-    place_product_TK = canvas.create_oval(30, 75, 60, 105, outline='black', width=2)#p1
-    place_coin_TK = canvas.create_oval(120, 160, 150, 190, outline='black', width=2)#p2
-    place_validate_coin_TK = canvas.create_oval(210, 75, 240, 105, outline='black', width=2)#p3
+    place_initial_state_TK = canvas.create_oval(30, 75, 60, 105, outline='black', width=2)#p1
+    place_picked_product_TK = canvas.create_oval(210, 75, 240, 105, outline='black', width=2)#p3
     place_10cent_TK = canvas.create_oval(390,25,420,55, outline='black', width=2) #p4
     place_20cent_TK = canvas.create_oval(390,125,420,155, outline='black', width=2) #p5 
     place_30cent_TK = canvas.create_oval(570,25,600,55, outline='black', width=2) #p6
@@ -102,7 +122,6 @@ if __name__ == "__main__":
     place_cancel_TK = canvas.create_oval(840, 160, 870, 190, outline='black', width=2)#p10
     
     textp1 = canvas.create_text(45, 90, text='P1')
-    textp2 = canvas.create_text(135, 175, text='P2')
     textp3 = canvas.create_text(225, 90, text='P3')
     textp4 = canvas.create_text(405, 40, text='P4')
     textp5 = canvas.create_text(405, 140, text='P5')
@@ -113,7 +132,7 @@ if __name__ == "__main__":
     textp10 = canvas.create_text(855, 175, text='P10')
 
     # create GUI transitions
-    T0_TK = canvas.create_rectangle(120, 80, 150, 100, outline='black', width=2)
+    T0_TK = canvas.create_rectangle(120, 80, 150, 100, outline='black', width=2)#picked product
     textt0 = canvas.create_text(135, 90, text='T0')
     T1_TK = canvas.create_rectangle(480, 165, 510, 185, outline='black', width=2)#+50
     textt1 = canvas.create_text(495, 175, text='T1')
@@ -140,7 +159,6 @@ if __name__ == "__main__":
     
     # create GUI token
     token_TK_P1 = canvas.create_oval(40, 85, 50, 95, fill='black', state="normal") 
-    token_TK_P2 = canvas.create_oval(130, 170, 140, 180, fill='black', state="normal")
     token_TK_P3 = canvas.create_oval(220, 85, 230, 95, fill="black", state="hidden")
     token_TK_P4 = canvas.create_oval(400, 35, 410, 45, fill="black", state="hidden")
     token_TK_P5 = canvas.create_oval(400, 135, 410, 145, fill="black", state="hidden")
@@ -153,7 +171,6 @@ if __name__ == "__main__":
     # create GUI arrows
     line = canvas.create_line(70, 90, 110, 90, arrow=tk.LAST)#p1 - t0
     line = canvas.create_line(160, 90, 200, 90, arrow=tk.LAST) #t0 - p3
-    line = canvas.create_line(135, 150, 135, 110, arrow=tk.LAST) #p2 - t0
     line = canvas.create_line(225, 115, 225, 175, 470, 175, arrow=tk.LAST)#p3-t1 830
     line = canvas.create_line(520, 175, 830, 175, arrow=tk.LAST)#t1-p10 830
     line = canvas.create_line(250, 80, 290, 50, arrow=tk.LAST)#p3-t2
@@ -184,22 +201,22 @@ if __name__ == "__main__":
     tk.Label(drink_menu, text="Menu").pack(anchor="c")
     tk.Label(drink_menu, text="Επιλέξτε ποτό:").pack(anchor="c")
     water_radio_button = tk.Radiobutton(drink_menu, text="Νερό (€1)", variable=drink_var, state="normal", value="water")
-    icetea_radio_button = tk.Radiobutton(drink_menu, text="Παγωμένο τσάι (€2)", variable=drink_var, state="normal", value="icetea")
-    lemonade_radio_btn = tk.Radiobutton(drink_menu, text="Λεμονάδα (€1.5)", variable=drink_var, state="normal", value="lemonade")
+    icetea_radio_button = tk.Radiobutton(drink_menu, text="Παγωμένο τσάι (€2)", variable=drink_var, state="disabled", value="icetea")
+    lemonade_radio_btn = tk.Radiobutton(drink_menu, text="Λεμονάδα (€1.5)", variable=drink_var, state="disabled", value="lemonade")
     water_radio_button.pack(anchor="c")
     icetea_radio_button.pack(anchor="c")
     lemonade_radio_btn.pack(anchor="c")
     drink_menu.pack(anchor="c")
 
     # Create a coin menu with radio buttons
-    coin_var = tk.StringVar(value="null")
+    coin_var = tk.StringVar(value=0)
     coin_menu = tk.Frame(root)
     tk.Label(coin_menu, text="Εισάγετε νόμισμα:").pack(anchor="w")
-    coin_small_10 = tk.Radiobutton(coin_menu, text="€0.10", variable=coin_var, state="normal", value=10)
-    coin_small_20 = tk.Radiobutton(coin_menu, text="€0.20", variable=coin_var, state="normal", value=20)
-    coin_small_50 = tk.Radiobutton(coin_menu, text="€0.50", variable=coin_var, state="normal", value=50)
-    coin_one = tk.Radiobutton(coin_menu, text="€1", variable=coin_var, state="normal", value=100)
-    coin_two = tk.Radiobutton(coin_menu, text="€2", variable=coin_var, state="normal", value=200)
+    coin_small_10 = tk.Radiobutton(coin_menu, text="€0.10", variable=coin_var, state="disabled", value=10)
+    coin_small_20 = tk.Radiobutton(coin_menu, text="€0.20", variable=coin_var, state="disabled", value=20)
+    coin_small_50 = tk.Radiobutton(coin_menu, text="€0.50", variable=coin_var, state="disabled", value=50)
+    coin_one = tk.Radiobutton(coin_menu, text="€1", variable=coin_var, state="disabled", value=100)
+    coin_two = tk.Radiobutton(coin_menu, text="€2", variable=coin_var, state="disabled", value=200)
     coin_small_10.pack(anchor="c")
     coin_small_20.pack(anchor="c")
     coin_small_50.pack(anchor="c")
@@ -208,13 +225,13 @@ if __name__ == "__main__":
     coin_menu.pack(anchor="c")
 
     # create action buttons
-    select_product_button = tk.Button(root, text="Επιλέξτε προϊόν", command=run_petri_net)
+    select_product_button = tk.Button(root, text="Επιλέξτε προϊόν", state="normal", command=run_petri_net)
     insert_coin_button = tk.Button(root, text="Εισάγετε κέρμα", state="disabled", command=run_petri_net)
-    buy_product_button = tk.Button(root, text="Αγορά", state="disabled", command=buy)
-    cancel_product_button = tk.Button(root, text="Ακύρωση", state="disabled", command=cancel)
-    insert_coin_button.pack()
+    # buy_product_button = tk.Button(root, text="Αγορά", state="disabled", command=buy)
+    # cancel_product_button = tk.Button(root, text="Ακύρωση", state="disabled", command=cancel)
     select_product_button.pack()
-    buy_product_button.pack()
-    cancel_product_button.pack()
+    insert_coin_button.pack()
+    # buy_product_button.pack()
+    # cancel_product_button.pack()
 
     root.mainloop()
