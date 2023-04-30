@@ -1,7 +1,5 @@
 
-
 # TODO 1 => Cancel button must reset all states to 0
-# TODO 2 (IN_PROGRESS BY ALKIS) => use a global value to calculate and update on each selection
 # TODO 3 => Make the rest of the transitions 
 # TODO 4 => Use or remove entirely the buy button and transition
 # TODO 5 => Fix naming in tokens and places, for example token 0 and 2 does not exist
@@ -9,11 +7,24 @@
 # TODO 7 => Create a README documentation for usage and exmplanation what P,T do and represent
 # TODO 8 => Complete the modeling for IceTea and Lemonade
 
-
 import tkinter as tk
 # Global Variables
 canRunTransition0 = True
 currentValue = 0
+productsList = {
+    "water": {
+        "name": "water",
+        "value": 50
+    },
+    "icetea": {
+        "name": "icetea",
+        "value": 210
+    },    
+    "lemonade": {
+        "name": "lemonade",
+        "value": 160
+    }
+}
 
 # Define the Petri net transitions
 def transition0():
@@ -23,28 +34,67 @@ def transition0():
         return False
 
 def transition1():
-    if int(coin_var.get()) == 50:
+    if currentValue >= productsList["water"]["value"]:
         return True
     else:
         return False
     
 def transition2():
-    if int(coin_var.get()) == 10:
+    if currentValue == 10:
         return True
     else:
         return False
     
 # Helpers
 def messageHandler(message):
+    """Shows label massage"""
     petri_log_label = tk.Label(root, text=message)
     petri_log_label.pack()
 
 def tokenHandler(activeToken):
-    #Κρύβει όλα τα προηγούμενα τόκεν
+    """Hides all tokens except form the given argument"""
     tokensList = ["token_TK_P1", "token_TK_P3", "token_TK_P4", "token_TK_P5", "token_TK_P6", "token_TK_P7", "token_TK_P8", "token_TK_P9", "token_TK_P10"]
     for token in tokensList:
         if token != activeToken:
             canvas.itemconfig(eval(token), state="hidden")
+
+def checkCoinLimitHandler():
+    """
+    Checks if the limit of selected item is reached
+    and hides the insert coin button
+    """
+    if drink_var.get() == productsList["water"]["name"]:
+        if currentValue >= productsList["water"]["value"]:
+            insert_coin_button.config(state="disabled")
+
+    if drink_var.get() == productsList["icetea"]["name"]:
+        if currentValue >= productsList["icetea"]["value"]:
+            insert_coin_button.config(state="disabled")
+
+    if drink_var.get() == productsList["lemonade"]["name"]:
+        if currentValue >= productsList["lemonade"]["value"]:
+            insert_coin_button.config(state="disabled")    
+
+def remainingValueHandler():
+    """Returns the remaining value"""
+    if drink_var.get() == productsList["water"]["name"]:
+        return productsList["water"]["value"] - currentValue 
+    if drink_var.get() == productsList["icetea"]["name"]:
+        return productsList["icetea"]["value"] - currentValue 
+    if drink_var.get() == productsList["lemonade"]["name"]:
+        return productsList["lemonade"]["value"] - currentValue 
+
+def calculateChangeHandler():
+    """Returns the change value"""
+    if drink_var.get() == productsList["water"]["name"] and currentValue > productsList["water"]["value"]:
+        return currentValue - productsList["water"]["value"]
+    if drink_var.get() == productsList["icetea"]["name"] and currentValue > productsList["icetea"]["value"]:
+        return currentValue - productsList["icetea"]["value"]
+    if drink_var.get() == productsList["lemonade"]["name"] and currentValue > productsList["lemonade"]["value"]:
+        return currentValue - productsList["lemonade"]["value"]
+    else:
+        return 0
+        
     
 # def buy():
 #     canvas.itemconfigure(token_TK_P3, state="hidden")
@@ -66,6 +116,8 @@ def tokenHandler(activeToken):
 
 def run_petri_net():
     global canRunTransition0, currentValue
+    currentValue += int(coin_var.get())
+    checkCoinLimitHandler()
 
     if transition0() and canRunTransition0:
         canvas.itemconfigure(token_TK_P1, state="hidden")
@@ -88,21 +140,19 @@ def run_petri_net():
         canRunTransition0 = False
 
     if transition1():
-        # coin_value = coin_var.get()
         canvas.itemconfigure(token_TK_P10, state="normal")
         tokenHandler("token_TK_P10")
 
         # buy_product_button.config(state="active")
         # cancel_product_button.config(state="active")
-        messageHandler(f"Εισαγωγή νομίσματος: {currentValue}, το ποσό συμπληρώθηκε")
+        changeAmount = calculateChangeHandler()
+        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, το ποσό συμπληρώθηκε, έδωσε ρέστα €{changeAmount}")
 
     if transition2():
-        # coin_value = coin_var.get()
         canvas.itemconfigure(token_TK_P4, state="normal")
         tokenHandler("token_TK_P4")
-
-        messageHandler(f"Εισαγωγή νομίσματος: {currentValue}, υπολείπονται ακόμη Χ")
-
+        remainingAmount = remainingValueHandler()
+        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
 
 if __name__ == "__main__":
     root = tk.Tk()
@@ -200,9 +250,9 @@ if __name__ == "__main__":
     drink_menu = tk.Frame(root)
     tk.Label(drink_menu, text="Menu").pack(anchor="c")
     tk.Label(drink_menu, text="Επιλέξτε ποτό:").pack(anchor="c")
-    water_radio_button = tk.Radiobutton(drink_menu, text="Νερό (€1)", variable=drink_var, state="normal", value="water")
-    icetea_radio_button = tk.Radiobutton(drink_menu, text="Παγωμένο τσάι (€2)", variable=drink_var, state="disabled", value="icetea")
-    lemonade_radio_btn = tk.Radiobutton(drink_menu, text="Λεμονάδα (€1.5)", variable=drink_var, state="disabled", value="lemonade")
+    water_radio_button = tk.Radiobutton(drink_menu, text="Νερό (€0.50)", variable=drink_var, state="normal", value="water")
+    icetea_radio_button = tk.Radiobutton(drink_menu, text="Παγωμένο τσάι (€2.10)", variable=drink_var, state="disabled", value="icetea")
+    lemonade_radio_btn = tk.Radiobutton(drink_menu, text="Λεμονάδα (€1.60)", variable=drink_var, state="disabled", value="lemonade")
     water_radio_button.pack(anchor="c")
     icetea_radio_button.pack(anchor="c")
     lemonade_radio_btn.pack(anchor="c")
