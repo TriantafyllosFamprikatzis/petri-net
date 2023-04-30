@@ -44,6 +44,60 @@ def transition2():
         return True
     else:
         return False
+
+def transition3():
+    if currentValue == 20:
+        return True
+    else:
+        return False
+
+def transition4():
+    if currentValue == 20:
+        return True
+    else:
+        return False
+
+def transition5():
+    if currentValue == 30:
+        return True
+    else:
+        return False
+
+def transition6():
+    if currentValue == 30:
+        return True
+    else:
+        return False
+
+def transition7():
+    if currentValue == 40:
+        return True
+    else:
+        return False
+
+def transition8():
+    if currentValue == 40:
+        return True
+    else:
+        return False
+
+def transition9():
+    if currentValue == 50:
+        return True
+    else:
+        return False
+
+def transition10():
+    if currentValue == 50:
+        return True
+    else:
+        return False
+
+def transition11():
+    if currentValue >= productsList["water"]["value"]:
+        return True
+    else:
+        return False
     
 # Helpers
 def messageHandler(message):
@@ -139,24 +193,50 @@ def run_petri_net():
         messageHandler("Το προϊόν προστέθηκε:")
         canRunTransition0 = False
 
-    if transition1():
+    if transition1() or transition11():
         canvas.itemconfigure(token_TK_P10, state="normal")
         tokenHandler("token_TK_P10")
-
-        # buy_product_button.config(state="active")
-        # cancel_product_button.config(state="active")
         changeAmount = calculateChangeHandler()
-        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, το ποσό συμπληρώθηκε, έδωσε ρέστα €{changeAmount}")
+        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, το ποσό συμπληρώθηκε, έδωσε ρέστα €{changeAmount}")        
 
     if transition2():
         canvas.itemconfigure(token_TK_P4, state="normal")
         tokenHandler("token_TK_P4")
         remainingAmount = remainingValueHandler()
         messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
+        cancel_product_button.config(state="active")
+
+    if transition3() or transition4():
+        canvas.itemconfigure(token_TK_P5, state="normal")
+        tokenHandler("token_TK_P5")
+        remainingAmount = remainingValueHandler()
+        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
+        cancel_product_button.config(state="active")
+
+    if transition5() or transition6(): 
+        canvas.itemconfigure(token_TK_P6, state="normal")
+        tokenHandler("token_TK_P6")
+        remainingAmount = remainingValueHandler()
+        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
+        cancel_product_button.config(state="active")
+
+    if transition7() or transition8():
+        canvas.itemconfigure(token_TK_P7, state="normal")
+        tokenHandler("token_TK_P7")
+        remainingAmount = remainingValueHandler()
+        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
+        cancel_product_button.config(state="active")
+
+    if transition9() or transition10():
+        canvas.itemconfigure(token_TK_P8, state="normal")
+        tokenHandler("token_TK_P8")
+        remainingAmount = remainingValueHandler()
+        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
+        cancel_product_button.config(state="active")
 
 if __name__ == "__main__":
     root = tk.Tk()
-    canvas = tk.Canvas(root, width=1350, height=600)
+    canvas = tk.Canvas(root, width=1350, height=200)
     canvas.pack()
     root.title("Petri net Αυτόματος Πωλητής")  
 
@@ -222,7 +302,7 @@ if __name__ == "__main__":
     line = canvas.create_line(70, 90, 110, 90, arrow=tk.LAST)#p1 - t0
     line = canvas.create_line(160, 90, 200, 90, arrow=tk.LAST) #t0 - p3
     line = canvas.create_line(225, 115, 225, 175, 470, 175, arrow=tk.LAST)#p3-t1 830
-    line = canvas.create_line(520, 175, 830, 175, arrow=tk.LAST)#t1-p10 830
+    line = canvas.create_line(520, 175, 760, 175, 760, 110, arrow=tk.LAST)#t1-p8 830
     line = canvas.create_line(250, 80, 290, 50, arrow=tk.LAST)#p3-t2
     line = canvas.create_line(250, 100, 290, 130, arrow=tk.LAST)#p3-t3
     line = canvas.create_line(340, 40, 380, 40, arrow=tk.LAST)#t2-p4
