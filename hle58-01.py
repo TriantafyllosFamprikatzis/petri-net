@@ -300,7 +300,7 @@ if __name__ == "__main__":
     line = canvas.create_line(70, 90, 110, 90, arrow=tk.LAST)#p1 - t0
     line = canvas.create_line(160, 90, 200, 90, arrow=tk.LAST) #t0 - p3
     line = canvas.create_line(225, 115, 225, 175, 470, 175, arrow=tk.LAST)#p3-t1 830
-    line = canvas.create_line(520, 175, 830, 175, arrow=tk.LAST)#t1-p10 830
+    line = canvas.create_line(520, 175, 760, 175, 760, 110, arrow=tk.LAST)#t1-p8 
     line = canvas.create_line(250, 80, 290, 50, arrow=tk.LAST)#p3-t2
     line = canvas.create_line(250, 100, 290, 130, arrow=tk.LAST)#p3-t3
     line = canvas.create_line(340, 40, 380, 40, arrow=tk.LAST)#t2-p4
