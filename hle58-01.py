@@ -160,19 +160,6 @@ if __name__ == "__main__":
     canvas.pack()
     root.title("Petri net Αυτόματος Πωλητής")  
 
-# create GUI scroll-bar
-    root.geometry("500x500")
-    frame = tk.Frame(canvas, bg="white")
-    for i in range(600):
-        tk.Label(frame, text=f"").pack()
-    
-    scrollbar = tk.Scrollbar(root, orient="vertical", command=canvas.yview)
-    canvas.config(yscrollcommand=scrollbar.set)
-    scrollbar.pack(side="right", fill="y")
-    canvas.pack(side="left", fill="both", expand=True)
-    canvas.create_window((0, 0), window=frame, anchor="nw")
-    frame.bind("<Configure>", lambda event: canvas.configure(scrollregion=canvas.bbox("all")))
-
     # create GUI places and texts
     place_initial_state_TK = canvas.create_oval(30, 75, 60, 105, outline='black', width=2)#p1
     place_picked_product_TK = canvas.create_oval(210, 75, 240, 105, outline='black', width=2)#p3
