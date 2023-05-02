@@ -44,7 +44,61 @@ def transition2():
         return True
     else:
         return False
-    
+
+def transition3():
+    if currentValue == 20:
+        return True
+    else:
+        return False
+
+def transition4():
+    if currentValue == 20:
+        return True
+    else:
+        return False
+
+def transition5():
+    if currentValue == 30:
+        return True
+    else:
+        return False
+
+def transition6():
+    if currentValue == 30:
+        return True
+    else:
+        return False
+
+def transition7():
+    if currentValue == 40:
+        return True
+    else:
+        return False
+
+def transition8():
+    if currentValue == 40:
+        return True
+    else:
+        return False
+
+def transition9():
+    if currentValue == 50:
+        return True
+    else:
+        return False
+
+def transition10():
+    if currentValue == 50:
+        return True
+    else:
+        return False
+
+def transition11():
+    if currentValue >= productsList["water"]["value"]:
+        return True
+    else:
+        return False 
+
 # Helpers
 def messageHandler(message):
     """Shows label massage"""
@@ -139,7 +193,7 @@ def run_petri_net():
         messageHandler("Το προϊόν προστέθηκε:")
         canRunTransition0 = False
 
-    if transition1():
+    if transition1() or transition11():
         canvas.itemconfigure(token_TK_P10, state="normal")
         tokenHandler("token_TK_P10")
 
@@ -153,12 +207,49 @@ def run_petri_net():
         tokenHandler("token_TK_P4")
         remainingAmount = remainingValueHandler()
         messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
+    
+    if transition3() or transition4():
+        canvas.itemconfigure(token_TK_P5, state="normal")
+        tokenHandler("token_TK_P5")
+        remainingAmount = remainingValueHandler()
+        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
+
+    if transition5() or transition6(): 
+        canvas.itemconfigure(token_TK_P6, state="normal")
+        tokenHandler("token_TK_P6")
+        remainingAmount = remainingValueHandler()
+        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
+
+    if transition7() or transition8():
+        canvas.itemconfigure(token_TK_P7, state="normal")
+        tokenHandler("token_TK_P7")
+        remainingAmount = remainingValueHandler()
+        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
+
+    if transition9() or transition10():
+        canvas.itemconfigure(token_TK_P8, state="normal")
+        tokenHandler("token_TK_P8")
+        remainingAmount = remainingValueHandler()
+        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
 
 if __name__ == "__main__":
     root = tk.Tk()
     canvas = tk.Canvas(root, width=1350, height=600)
     canvas.pack()
     root.title("Petri net Αυτόματος Πωλητής")  
+
+    # create GUI scroll-bar
+    root.geometry("500x500")
+    frame = tk.Frame(canvas, bg="white")
+    for i in range(600):
+        tk.Label(frame, text=f"").pack()
+    
+    scrollbar = tk.Scrollbar(root, orient="vertical", command=canvas.yview)
+    canvas.config(yscrollcommand=scrollbar.set)
+    scrollbar.pack(side="right", fill="y")
+    canvas.pack(side="left", fill="both", expand=True)
+    canvas.create_window((0, 0), window=frame, anchor="nw")
+    frame.bind("<Configure>", lambda event: canvas.configure(scrollregion=canvas.bbox("all")))
 
     # create GUI places and texts
     place_initial_state_TK = canvas.create_oval(30, 75, 60, 105, outline='black', width=2)#p1
