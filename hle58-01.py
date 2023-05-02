@@ -44,7 +44,61 @@ def transition2():
         return True
     else:
         return False
-    
+
+def transition3():
+    if currentValue == 20:
+        return True
+    else:
+        return False
+
+def transition4():
+    if currentValue == 20:
+        return True
+    else:
+        return False
+
+def transition5():
+    if currentValue == 30:
+        return True
+    else:
+        return False
+
+def transition6():
+    if currentValue == 30:
+        return True
+    else:
+        return False
+
+def transition7():
+    if currentValue == 40:
+        return True
+    else:
+        return False
+
+def transition8():
+    if currentValue == 40:
+        return True
+    else:
+        return False
+
+def transition9():
+    if currentValue == 50:
+        return True
+    else:
+        return False
+
+def transition10():
+    if currentValue == 50:
+        return True
+    else:
+        return False
+
+def transition11():
+    if currentValue >= productsList["water"]["value"]:
+        return True
+    else:
+        return False 
+
 # Helpers
 def messageHandler(message):
     """Shows label massage"""
@@ -139,7 +193,7 @@ def run_petri_net():
         messageHandler("Το προϊόν προστέθηκε:")
         canRunTransition0 = False
 
-    if transition1():
+    if transition1() or transition11():
         canvas.itemconfigure(token_TK_P10, state="normal")
         tokenHandler("token_TK_P10")
 
@@ -151,6 +205,30 @@ def run_petri_net():
     if transition2():
         canvas.itemconfigure(token_TK_P4, state="normal")
         tokenHandler("token_TK_P4")
+        remainingAmount = remainingValueHandler()
+        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
+    
+    if transition3() or transition4():
+        canvas.itemconfigure(token_TK_P5, state="normal")
+        tokenHandler("token_TK_P5")
+        remainingAmount = remainingValueHandler()
+        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
+
+    if transition5() or transition6(): 
+        canvas.itemconfigure(token_TK_P6, state="normal")
+        tokenHandler("token_TK_P6")
+        remainingAmount = remainingValueHandler()
+        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
+
+    if transition7() or transition8():
+        canvas.itemconfigure(token_TK_P7, state="normal")
+        tokenHandler("token_TK_P7")
+        remainingAmount = remainingValueHandler()
+        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
+
+    if transition9() or transition10():
+        canvas.itemconfigure(token_TK_P8, state="normal")
+        tokenHandler("token_TK_P8")
         remainingAmount = remainingValueHandler()
         messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
 
