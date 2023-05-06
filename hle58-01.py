@@ -6,6 +6,7 @@
 # TODO 6 => Improve design in tkinter
 # TODO 7 => Create a README documentation for usage and exmplanation what P,T do and represent
 # TODO 8 => Complete the modeling for IceTea and Lemonade
+# TODO 9 => Add overvlow Y scroll bacause log messages hide
 
 import tkinter as tk
 # Global Variables
@@ -112,6 +113,12 @@ def tokenHandler(activeToken):
         if token != activeToken:
             canvas.itemconfig(eval(token), state="hidden")
 
+def numberConverterHandler(integer):
+    """Converts to 2 decimals and returns it as a string"""
+    amount = int(integer)
+    amount_str = "{:.2f}".format(amount / 100)
+    return amount_str
+
 def checkCoinLimitHandler():
     """
     Checks if the limit of selected item is reached
@@ -131,24 +138,35 @@ def checkCoinLimitHandler():
 
 def remainingValueHandler():
     """Returns the remaining value"""
+    result = int()
+
     if drink_var.get() == productsList["water"]["name"]:
-        return productsList["water"]["value"] - currentValue 
+        result = productsList["water"]["value"] - currentValue 
+        return numberConverterHandler(result)
+
     if drink_var.get() == productsList["icetea"]["name"]:
-        return productsList["icetea"]["value"] - currentValue 
+        result = productsList["icetea"]["value"] - currentValue 
+        return numberConverterHandler(result)
+
     if drink_var.get() == productsList["lemonade"]["name"]:
-        return productsList["lemonade"]["value"] - currentValue 
+        result = productsList["lemonade"]["value"] - currentValue 
+        return numberConverterHandler(result)
 
 def calculateChangeHandler():
     """Returns the change value"""
+    result = int()
+
     if drink_var.get() == productsList["water"]["name"] and currentValue > productsList["water"]["value"]:
-        return currentValue - productsList["water"]["value"]
+        result = currentValue - productsList["water"]["value"]
+        return numberConverterHandler(result)
     if drink_var.get() == productsList["icetea"]["name"] and currentValue > productsList["icetea"]["value"]:
-        return currentValue - productsList["icetea"]["value"]
+        result = currentValue - productsList["icetea"]["value"]                                           
+        return numberConverterHandler(result)
     if drink_var.get() == productsList["lemonade"]["name"] and currentValue > productsList["lemonade"]["value"]:
-        return currentValue - productsList["lemonade"]["value"]
+        result = currentValue - productsList["lemonade"]["value"]
+        return numberConverterHandler(result)
     else:
-        return 0
-        
+        return "0.00"
     
 # def buy():
 #     canvas.itemconfigure(token_TK_P3, state="hidden")
@@ -200,37 +218,43 @@ def run_petri_net():
         # buy_product_button.config(state="active")
         # cancel_product_button.config(state="active")
         changeAmount = calculateChangeHandler()
-        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, το ποσό συμπληρώθηκε, έδωσε ρέστα €{changeAmount}")
+        insertedAmount = numberConverterHandler(coin_var.get())
+        messageHandler(f"Εισαγωγή νομίσματος: €{insertedAmount}, το ποσό συμπληρώθηκε, έδωσε ρέστα €{changeAmount}")
 
     if transition2():
         canvas.itemconfigure(token_TK_P4, state="normal")
         tokenHandler("token_TK_P4")
         remainingAmount = remainingValueHandler()
-        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
+        insertedAmount = numberConverterHandler(coin_var.get())
+        messageHandler(f"Εισαγωγή νομίσματος: €{insertedAmount}, υπολείπονται ακόμη €{remainingAmount}")
     
     if transition3() or transition4():
         canvas.itemconfigure(token_TK_P5, state="normal")
         tokenHandler("token_TK_P5")
         remainingAmount = remainingValueHandler()
-        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
+        insertedAmount = numberConverterHandler(coin_var.get())
+        messageHandler(f"Εισαγωγή νομίσματος: €{insertedAmount}, υπολείπονται ακόμη €{remainingAmount}")
 
     if transition5() or transition6(): 
         canvas.itemconfigure(token_TK_P6, state="normal")
         tokenHandler("token_TK_P6")
         remainingAmount = remainingValueHandler()
-        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
+        insertedAmount = numberConverterHandler(coin_var.get())
+        messageHandler(f"Εισαγωγή νομίσματος: €{insertedAmount}, υπολείπονται ακόμη €{remainingAmount}")
 
     if transition7() or transition8():
         canvas.itemconfigure(token_TK_P7, state="normal")
         tokenHandler("token_TK_P7")
         remainingAmount = remainingValueHandler()
-        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
+        insertedAmount = numberConverterHandler(coin_var.get())
+        messageHandler(f"Εισαγωγή νομίσματος: €{insertedAmount}, υπολείπονται ακόμη €{remainingAmount}")
 
     if transition9() or transition10():
         canvas.itemconfigure(token_TK_P8, state="normal")
         tokenHandler("token_TK_P8")
         remainingAmount = remainingValueHandler()
-        messageHandler(f"Εισαγωγή νομίσματος: €{coin_var.get()}, υπολείπονται ακόμη €{remainingAmount}")
+        insertedAmount = numberConverterHandler(coin_var.get())
+        messageHandler(f"Εισαγωγή νομίσματος: €{insertedAmount}, υπολείπονται ακόμη €{remainingAmount}")
 
 if __name__ == "__main__":
     root = tk.Tk()
