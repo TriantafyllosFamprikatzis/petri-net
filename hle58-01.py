@@ -251,7 +251,6 @@ def run_petri_net():
         tokenHandler("token_TK_P8")
         remainingAmount = remainingValueHandler()
         insertedAmount = numberConverterHandler(coin_var.get())
-        messageHandler(f"Εισαγωγή νομίσματος: €{insertedAmount}, υπολείπονται ακόμη €{remainingAmount}")
 
 if __name__ == "__main__":
     root = tk.Tk()
