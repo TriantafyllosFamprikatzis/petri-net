@@ -1,8 +1,6 @@
 
 # TODO 1 => Cancel button must reset all states to 0
-# TODO 3 => Make the rest of the transitions 
 # TODO 4 => Use or remove entirely the buy button and transition
-# TODO 5 => Fix naming in tokens and places, for example token 0 and 2 does not exist
 # TODO 6 => Improve design in tkinter
 # TODO 7 => Create a README documentation for usage and exmplanation what P,T do and represent
 # TODO 8 => Complete the modeling for IceTea and Lemonade
@@ -103,8 +101,7 @@ def transition11():
 # Helpers
 def messageHandler(message):
     """Shows label massage"""
-    petri_log_label = tk.Label(root, text=message)
-    petri_log_label.pack()
+    messages_text.insert(tk.END, message + "\n")
 
 def tokenHandler(activeToken):
     """Hides all tokens except form the given argument"""
@@ -208,7 +205,7 @@ def run_petri_net():
         insert_coin_button.config(state="normal")
         select_product_button.config(state="disabled")
 
-        messageHandler("Το προϊόν προστέθηκε:")
+        messageHandler("Το προϊόν προστέθηκε!")
         canRunTransition0 = False
 
     if transition1() or transition11():
@@ -258,7 +255,7 @@ def run_petri_net():
 
 if __name__ == "__main__":
     root = tk.Tk()
-    canvas = tk.Canvas(root, width=1350, height=600)
+    canvas = tk.Canvas(root, width=1000, height=300)
     canvas.pack()
     root.title("Petri net Αυτόματος Πωλητής")  
 
@@ -347,6 +344,14 @@ if __name__ == "__main__":
     line = canvas.create_line(880, 90, 920, 90, arrow=tk.LAST)#t11-p9
     line = canvas.create_line(855, 110, 855, 150, arrow=tk.LAST)#t11-p10
     
+    # Scrollbar
+    messages_text = tk.Text(root)
+    messages_text.pack(side=tk.LEFT, fill=tk.Y)
+
+    scrollbar = tk.Scrollbar(root, command=messages_text.yview)
+    messages_text.configure(yscrollcommand=scrollbar.set)
+    scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
     # Create a drink menu with radio buttons
     drink_var = tk.StringVar(value="null")
     drink_menu = tk.Frame(root)
