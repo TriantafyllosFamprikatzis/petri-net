@@ -2,24 +2,24 @@
 def water_gui(canvas, tk):
     # create GUI places and texts
     place_initial_state_TK = canvas.create_oval(30, 75, 60, 105, outline='black', width=2)#p1
-    place_picked_product_TK = canvas.create_oval(210, 75, 240, 105, outline='black', width=2)#p3
-    place_10cent_TK = canvas.create_oval(390,25,420,55, outline='black', width=2) #p4
-    place_20cent_TK = canvas.create_oval(390,125,420,155, outline='black', width=2) #p5 
-    place_30cent_TK = canvas.create_oval(570,25,600,55, outline='black', width=2) #p6
-    place_40cent_TK = canvas.create_oval(570,125,600,155, outline='black', width=2) #p7
-    place_50cent_TK = canvas.create_oval(750, 75, 780, 105, outline='black', width=2) #p8
-    place_complete_TK = canvas.create_oval(930, 75, 960, 105, outline='black', width=2)#p9
-    place_cancel_TK = canvas.create_oval(840, 160, 870, 190, outline='black', width=2)#p10
+    place_picked_product_TK = canvas.create_oval(210, 75, 240, 105, outline='black', width=2)#p2
+    place_10cent_TK = canvas.create_oval(390,25,420,55, outline='black', width=2) #p3
+    place_20cent_TK = canvas.create_oval(390,125,420,155, outline='black', width=2) #p4 
+    place_30cent_TK = canvas.create_oval(570,25,600,55, outline='black', width=2) #p5
+    place_40cent_TK = canvas.create_oval(570,125,600,155, outline='black', width=2) #p6
+    place_50cent_TK = canvas.create_oval(750, 75, 780, 105, outline='black', width=2) #p7
+    # place_complete_TK = canvas.create_oval(930, 75, 960, 105, outline='black', width=2)#p8
+    # place_cancel_TK = canvas.create_oval(840, 160, 870, 190, outline='black', width=2)#p9
     
     textp1 = canvas.create_text(45, 90, text='P1')
-    textp3 = canvas.create_text(225, 90, text='P3')
-    textp4 = canvas.create_text(405, 40, text='P4')
-    textp5 = canvas.create_text(405, 140, text='P5')
-    textp6 = canvas.create_text(585, 40, text='P6')
-    textp7 = canvas.create_text(585, 140, text='P7')
-    textp8 = canvas.create_text(765, 90, text='P8')
-    textp9 = canvas.create_text(945, 90, text='P9')
-    textp10 = canvas.create_text(855, 175, text='P10')
+    textp2 = canvas.create_text(225, 90, text='P2')
+    textp3 = canvas.create_text(405, 40, text='P3')
+    textp4 = canvas.create_text(405, 140, text='P4')
+    textp5 = canvas.create_text(585, 40, text='P5')
+    textp6 = canvas.create_text(585, 140, text='P6')
+    textp7 = canvas.create_text(765, 90, text='P7')
+    # textp8 = canvas.create_text(945, 90, text='P8')
+    # textp9 = canvas.create_text(855, 175, text='P9')
 
     # create GUI transitions
     T0_TK = canvas.create_rectangle(120, 80, 150, 100, outline='black', width=2)#picked product
@@ -44,19 +44,8 @@ def water_gui(canvas, tk):
     textt9 = canvas.create_text(675, 40, text='T9')
     T10_TK = canvas.create_rectangle(660, 130, 690, 150, outline='black', width=2)#40+10
     textt10 = canvas.create_text(675, 140, text='T10')
-    T11_TK = canvas.create_rectangle(840, 80, 870, 100, outline='black', width=2)
-    textt11 = canvas.create_text(855, 90, text='T11')
-    
-    # # create GUI token
-    # token_TK_P1 = canvas.create_oval(40, 85, 50, 95, fill='black', state="normal") 
-    # token_TK_P3 = canvas.create_oval(220, 85, 230, 95, fill="black", state="hidden")
-    # token_TK_P4 = canvas.create_oval(400, 35, 410, 45, fill="black", state="hidden")
-    # token_TK_P5 = canvas.create_oval(400, 135, 410, 145, fill="black", state="hidden")
-    # token_TK_P6 = canvas.create_oval(580, 35, 590, 45, fill="black", state="hidden")
-    # token_TK_P7 = canvas.create_oval(580, 135, 590, 145, fill="black", state="hidden")
-    # token_TK_P8 = canvas.create_oval(760, 85, 770, 95, fill="black", state="hidden")
-    # token_TK_P9 = canvas.create_oval(940, 85, 950, 95, fill="black", state="hidden")
-    # token_TK_P10 = canvas.create_oval(850, 170, 860, 180, fill="black", state="hidden")
+    # T11_TK = canvas.create_rectangle(840, 80, 870, 100, outline='black', width=2)
+    # textt11 = canvas.create_text(855, 90, text='T11')
 
     # create GUI arrows
     line = canvas.create_line(70, 90, 110, 90, arrow=tk.LAST)#p1 - t0
@@ -81,6 +70,6 @@ def water_gui(canvas, tk):
     line = canvas.create_line(610, 140, 650, 140, arrow=tk.LAST)#p7-t10
     line = canvas.create_line(700, 40, 740, 70, arrow=tk.LAST)#t9-p8
     line = canvas.create_line(700, 140, 740, 110, arrow=tk.LAST)#t10-p8
-    line = canvas.create_line(790, 90, 830, 90, arrow=tk.LAST)#p8-t11
-    line = canvas.create_line(880, 90, 920, 90, arrow=tk.LAST)#t11-p9
-    line = canvas.create_line(855, 110, 855, 150, arrow=tk.LAST)#t11-p10
+    # line = canvas.create_line(790, 90, 830, 90, arrow=tk.LAST)#p8-t11
+    # line = canvas.create_line(880, 90, 920, 90, arrow=tk.LAST)#t11-p9
+    # line = canvas.create_line(855, 110, 855, 150, arrow=tk.LAST)#t11-p10

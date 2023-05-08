@@ -1,11 +1,8 @@
 
 # TODO 1 => Cancel button must reset all states to 0
-# TODO 4 => Use or remove entirely the buy button and transition
 # TODO 6 => Improve design in tkinter
 # TODO 7 => Create a README documentation for usage and exmplanation what P,T do and represent
 # TODO 8 => Complete the modeling for IceTea and Lemonade
-# TODO 9 => Add overvlow Y scroll bacause log messages hide
-# TODO 10 => Add missing token 2
 
 import tkinter as tk
 from helpers import checkCoinLimitHandler
@@ -16,8 +13,8 @@ from petri_models.water.water_gui import water_gui
 currentValue = 0
     
 # def buy():
-#     canvas.itemconfigure(token_TK_P3, state="hidden")
-#     canvas.itemconfigure(token_TK_P5, state="normal")
+#     canvas.itemconfigure(token_TK_P2, state="hidden")
+#     canvas.itemconfigure(token_TK_P4, state="normal")
 
 #     buy_product_button.config(state="disabled")
 #     cancel_product_button.config(state="disabled")
@@ -25,8 +22,8 @@ currentValue = 0
 #     messageHandler("Το προϊόν έχει διανεμηθεί, η συναλλαγή ολοκληρώθηκε!")
 
 # def cancel():
-#     canvas.itemconfigure(token_TK_P3, state="hidden")
-#     canvas.itemconfigure(token_TK_P4, state="normal")
+#     canvas.itemconfigure(token_TK_P2, state="hidden")
+#     canvas.itemconfigure(token_TK_P3, state="normal")
 
 #     buy_product_button.config(state="disabled")
 #     cancel_product_button.config(state="disabled")
@@ -53,14 +50,12 @@ def run_petri_net():
 
     tokens = {
         "token_TK_P1": token_TK_P1,
+        "token_TK_P2": token_TK_P2,
         "token_TK_P3": token_TK_P3,
         "token_TK_P4": token_TK_P4,
         "token_TK_P5": token_TK_P5,
         "token_TK_P6": token_TK_P6,
         "token_TK_P7": token_TK_P7,
-        "token_TK_P8": token_TK_P8,
-        "token_TK_P9": token_TK_P9,
-        "token_TK_P10": token_TK_P10,
     }
 
     currentValue += int(coin_var.get())
@@ -74,8 +69,8 @@ def run_petri_net():
             insert_coin_button, select_product_button,
             messages_text, coin_small_10, coin_small_20,
             coin_small_50, coin_one, coin_two, token_TK_P1,
-            token_TK_P3, token_TK_P4, token_TK_P5, token_TK_P6,
-            token_TK_P7, token_TK_P8, token_TK_P10,
+            token_TK_P2, token_TK_P3, token_TK_P4, token_TK_P5,
+            token_TK_P6, token_TK_P7,
         )
 
 if __name__ == "__main__":
@@ -89,14 +84,14 @@ if __name__ == "__main__":
 
     # # create GUI token for water
     token_TK_P1 = canvas.create_oval(40, 85, 50, 95, fill='black', state="normal") 
-    token_TK_P3 = canvas.create_oval(220, 85, 230, 95, fill="black", state="hidden")
-    token_TK_P4 = canvas.create_oval(400, 35, 410, 45, fill="black", state="hidden")
-    token_TK_P5 = canvas.create_oval(400, 135, 410, 145, fill="black", state="hidden")
-    token_TK_P6 = canvas.create_oval(580, 35, 590, 45, fill="black", state="hidden")
-    token_TK_P7 = canvas.create_oval(580, 135, 590, 145, fill="black", state="hidden")
-    token_TK_P8 = canvas.create_oval(760, 85, 770, 95, fill="black", state="hidden")
-    token_TK_P9 = canvas.create_oval(940, 85, 950, 95, fill="black", state="hidden")
-    token_TK_P10 = canvas.create_oval(850, 170, 860, 180, fill="black", state="hidden")
+    token_TK_P2 = canvas.create_oval(220, 85, 230, 95, fill="black", state="hidden")
+    token_TK_P3 = canvas.create_oval(400, 35, 410, 45, fill="black", state="hidden")
+    token_TK_P4 = canvas.create_oval(400, 135, 410, 145, fill="black", state="hidden")
+    token_TK_P5 = canvas.create_oval(580, 35, 590, 45, fill="black", state="hidden")
+    token_TK_P6 = canvas.create_oval(580, 135, 590, 145, fill="black", state="hidden")
+    token_TK_P7 = canvas.create_oval(760, 85, 770, 95, fill="black", state="hidden")
+    # token_TK_P8 = canvas.create_oval(940, 85, 950, 95, fill="black", state="hidden")
+    # token_TK_P9 = canvas.create_oval(850, 170, 860, 180, fill="black", state="hidden")
     
     # Scrollbar
     messages_text = tk.Text(root)
