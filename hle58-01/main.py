@@ -33,6 +33,9 @@ currentValue = 0
 def run_petri_net():
     global currentValue
 
+    currentValue += int(coin_var.get())
+
+    # Dictionaries
     productsList = {
         "water": {
             "name": "water",
@@ -58,20 +61,35 @@ def run_petri_net():
         "token_TK_P7": token_TK_P7,
     }
 
-    currentValue += int(coin_var.get())
+    coins = {
+        "coin_small_10": coin_small_10,
+        "coin_small_20": coin_small_20,
+        "coin_small_50": coin_small_50,
+        "coin_one": coin_one,
+        "coin_two": coin_two,
+    }
+
+    buttons = {
+        "water_radio_button": water_radio_button,
+        "icetea_radio_button": icetea_radio_button,
+        "lemonade_radio_btn": lemonade_radio_btn,
+        "insert_coin_button": insert_coin_button,
+        "select_product_button": select_product_button,
+    }
+
+    data = {
+        "drink_var": drink_var,
+        "coin_var": coin_var,
+        "currentValue": currentValue,
+        "productsList": productsList,
+        "canvas": canvas,
+        "messages_text": messages_text,
+    }
+    
     checkCoinLimitHandler(drink_var, productsList, currentValue, insert_coin_button)
     
     if drink_var.get() == productsList["water"]["name"]:
-        water_transitions(
-            tokens, drink_var, coin_var, currentValue,
-            productsList, canvas, water_radio_button,
-            icetea_radio_button, lemonade_radio_btn,
-            insert_coin_button, select_product_button,
-            messages_text, coin_small_10, coin_small_20,
-            coin_small_50, coin_one, coin_two, token_TK_P1,
-            token_TK_P2, token_TK_P3, token_TK_P4, token_TK_P5,
-            token_TK_P6, token_TK_P7,
-        )
+        water_transitions(tokens, **data, **buttons, **coins, **tokens)
 
 if __name__ == "__main__":
     root = tk.Tk()
