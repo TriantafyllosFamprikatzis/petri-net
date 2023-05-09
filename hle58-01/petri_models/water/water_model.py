@@ -23,10 +23,10 @@ prevTransition10 = False
 # Define the Petri net transitions for water
 def water_transitions(
         tokens, drink_var, coin_var, currentValue,
-        productsList, canvas, water_radio_button,
+        productsList, canvas, messages_text, water_radio_button,
         icetea_radio_button, lemonade_radio_btn,
         insert_coin_button, select_product_button,
-        messages_text, coin_small_10, coin_small_20,
+        coin_small_10, coin_small_20,
         coin_small_50, coin_one, coin_two, token_TK_P1,
         token_TK_P2, token_TK_P3, token_TK_P4, token_TK_P5,
         token_TK_P6, token_TK_P7,
