@@ -126,8 +126,8 @@ def water_transitions(
             return False
 
     def transition9():
-        global prevTransition5, prevTransition6, prevTransition9, transitionStatus
-        if currentValue >= productsList["water"]["value"] and (prevTransition5 or prevTransition6):
+        global prevTransition5, prevTransition6, prevTransition9, transitionStatus, prevTransition5, prevTransition2
+        if currentValue >= productsList["water"]["value"] and (prevTransition5 or prevTransition6 or prevTransition2 or prevTransition5):
             prevTransition5 = False
             prevTransition6 = False
             prevTransition9 = True
@@ -137,8 +137,8 @@ def water_transitions(
             return False
 
     def transition10():
-        global prevTransition7, prevTransition8, prevTransition10, transitionStatus
-        if currentValue >= productsList["water"]["value"] and (prevTransition7 or prevTransition8):
+        global prevTransition7, prevTransition8, prevTransition10, transitionStatus, prevTransition7, prevTransition3
+        if currentValue >= productsList["water"]["value"] and (prevTransition7 or prevTransition8 or prevTransition7, prevTransition3):
             prevTransition7 = False
             prevTransition8 = False
             prevTransition10 = True
