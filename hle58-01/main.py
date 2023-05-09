@@ -82,7 +82,7 @@ if __name__ == "__main__":
     # if drink_var.get() == "null":
     water_gui(canvas, tk)
 
-    # # create GUI token for water
+    # # create GUI token
     token_TK_P1 = canvas.create_oval(40, 85, 50, 95, fill='black', state="normal") 
     token_TK_P2 = canvas.create_oval(220, 85, 230, 95, fill="black", state="hidden")
     token_TK_P3 = canvas.create_oval(400, 35, 410, 45, fill="black", state="hidden")
