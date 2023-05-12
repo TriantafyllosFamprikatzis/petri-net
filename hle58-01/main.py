@@ -27,13 +27,7 @@ waterTransitions = {
     "prevTransition10": False
 }
 
-def run_petri_net():
-    global currentValue, waterTransitions
-
-    currentValue += int(coin_var.get())
-
-    # Dictionaries
-    productsList = {
+productsList = {
         "water": {
             "name": "water",
             "value": 50
@@ -48,6 +42,12 @@ def run_petri_net():
         }
     }
 
+def run_petri_net():
+    global currentValue
+
+    currentValue += int(coin_var.get())
+
+    # Dictionaries of tkinter objects
     coins = {
         "coin_small_10": coin_small_10,
         "coin_small_20": coin_small_20,
@@ -147,9 +147,9 @@ if __name__ == "__main__":
     # create action buttons
     select_product_button = tk.Button(root, text="Επιλέξτε προϊόν", state="normal", command=run_petri_net)
     insert_coin_button = tk.Button(root, text="Εισάγετε κέρμα", state="disabled", command=run_petri_net)
-    reset_vending_machine_button = tk.Button(root, text="Ακύρωση", state="normal", command=lambda: resetHandler(canvas, drink_var, coin_var, waterTransitions, tokens))
+    # reset_vending_machine_button = tk.Button(root, text="Ακύρωση", state="normal", command=lambda: resetHandler(canvas, drink_var, coin_var, waterTransitions, tokens))
     select_product_button.pack()
     insert_coin_button.pack()
-    reset_vending_machine_button.pack()
+    # reset_vending_machine_button.pack()
 
     root.mainloop()
