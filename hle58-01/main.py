@@ -5,33 +5,30 @@
 # TODO 8 => Complete the modeling for IceTea and Lemonade
 
 import tkinter as tk
-from helpers import checkCoinLimitHandler
+from helpers import checkCoinLimitHandler, resetHandler
 from petri_models.water.water_model import water_transitions
 from petri_models.water.water_gui import water_gui
 
 # Global Variables
 currentValue = 0
-    
-# def buy():
-#     canvas.itemconfigure(token_TK_P2, state="hidden")
-#     canvas.itemconfigure(token_TK_P4, state="normal")
 
-#     buy_product_button.config(state="disabled")
-#     cancel_product_button.config(state="disabled")
-
-#     messageHandler("Το προϊόν έχει διανεμηθεί, η συναλλαγή ολοκληρώθηκε!")
-
-# def cancel():
-#     canvas.itemconfigure(token_TK_P2, state="hidden")
-#     canvas.itemconfigure(token_TK_P3, state="normal")
-
-#     buy_product_button.config(state="disabled")
-#     cancel_product_button.config(state="disabled")
-
-#     messageHandler("Συναλλαγή ακυρώθηκε!")
+waterTransitions = {
+    "canRunTransition0": True,
+    "prevTransition0": False,
+    "prevTransition1": False,
+    "prevTransition2": False,
+    "prevTransition3": False,
+    "prevTransition4": False,
+    "prevTransition5": False,
+    "prevTransition6": False,
+    "prevTransition7": False,
+    "prevTransition8": False,
+    "prevTransition9": False,
+    "prevTransition10": False
+}
 
 def run_petri_net():
-    global currentValue
+    global currentValue, waterTransitions
 
     currentValue += int(coin_var.get())
 
@@ -49,16 +46,6 @@ def run_petri_net():
             "name": "lemonade",
             "value": 160
         }
-    }
-
-    tokens = {
-        "token_TK_P1": token_TK_P1,
-        "token_TK_P2": token_TK_P2,
-        "token_TK_P3": token_TK_P3,
-        "token_TK_P4": token_TK_P4,
-        "token_TK_P5": token_TK_P5,
-        "token_TK_P6": token_TK_P6,
-        "token_TK_P7": token_TK_P7,
     }
 
     coins = {
@@ -87,9 +74,10 @@ def run_petri_net():
     }
     
     checkCoinLimitHandler(drink_var, productsList, currentValue, insert_coin_button)
+
     
     if drink_var.get() == productsList["water"]["name"]:
-        water_transitions(tokens, **data, **buttons, **coins, **tokens)
+        water_transitions(tokens, waterTransitions, buttons, coins, **data)
 
 if __name__ == "__main__":
     root = tk.Tk()
@@ -108,8 +96,16 @@ if __name__ == "__main__":
     token_TK_P5 = canvas.create_oval(580, 35, 590, 45, fill="black", state="hidden")
     token_TK_P6 = canvas.create_oval(580, 135, 590, 145, fill="black", state="hidden")
     token_TK_P7 = canvas.create_oval(760, 85, 770, 95, fill="black", state="hidden")
-    # token_TK_P8 = canvas.create_oval(940, 85, 950, 95, fill="black", state="hidden")
-    # token_TK_P9 = canvas.create_oval(850, 170, 860, 180, fill="black", state="hidden")
+
+    tokens = {
+        "token_TK_P1": token_TK_P1,
+        "token_TK_P2": token_TK_P2,
+        "token_TK_P3": token_TK_P3,
+        "token_TK_P4": token_TK_P4,
+        "token_TK_P5": token_TK_P5,
+        "token_TK_P6": token_TK_P6,
+        "token_TK_P7": token_TK_P7,
+    }
     
     # Scrollbar
     messages_text = tk.Text(root)
@@ -151,11 +147,9 @@ if __name__ == "__main__":
     # create action buttons
     select_product_button = tk.Button(root, text="Επιλέξτε προϊόν", state="normal", command=run_petri_net)
     insert_coin_button = tk.Button(root, text="Εισάγετε κέρμα", state="disabled", command=run_petri_net)
-    # buy_product_button = tk.Button(root, text="Αγορά", state="disabled", command=buy)
-    # cancel_product_button = tk.Button(root, text="Ακύρωση", state="disabled", command=cancel)
+    reset_vending_machine_button = tk.Button(root, text="Ακύρωση", state="normal", command=lambda: resetHandler(canvas, drink_var, coin_var, waterTransitions, tokens))
     select_product_button.pack()
     insert_coin_button.pack()
-    # buy_product_button.pack()
-    # cancel_product_button.pack()
+    reset_vending_machine_button.pack()
 
     root.mainloop()
