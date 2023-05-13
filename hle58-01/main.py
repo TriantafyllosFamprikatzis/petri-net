@@ -147,13 +147,13 @@ if __name__ == "__main__":
     water_gui(canvas, tk)
 
     # Create GUI token
-    token_TK_P1 = canvas.create_oval(40, 85, 50, 95, fill='black', state="normal") 
-    token_TK_P2 = canvas.create_oval(220, 85, 230, 95, fill="black", state="hidden")
-    token_TK_P3 = canvas.create_oval(400, 35, 410, 45, fill="black", state="hidden")
-    token_TK_P4 = canvas.create_oval(400, 135, 410, 145, fill="black", state="hidden")
-    token_TK_P5 = canvas.create_oval(580, 35, 590, 45, fill="black", state="hidden")
-    token_TK_P6 = canvas.create_oval(580, 135, 590, 145, fill="black", state="hidden")
-    token_TK_P7 = canvas.create_oval(760, 85, 770, 95, fill="black", state="hidden")
+    token_TK_P1 = canvas.create_oval(37, 82, 53, 98, fill='red', state="normal")
+    token_TK_P2 = canvas.create_oval(217, 82, 233, 98, fill="red", state="hidden")
+    token_TK_P3 = canvas.create_oval(397, 32, 413, 48, fill="red", state="hidden")
+    token_TK_P4 = canvas.create_oval(397, 132, 413, 148, fill="red", state="hidden")
+    token_TK_P5 = canvas.create_oval(577, 32, 593, 48, fill="red", state="hidden")
+    token_TK_P6 = canvas.create_oval(577, 132, 593, 148, fill="red", state="hidden")
+    token_TK_P7 = canvas.create_oval(757, 82, 773, 98, fill="red", state="hidden")
 
     # Scrollbar
     messages_text = tk.Text(root)
