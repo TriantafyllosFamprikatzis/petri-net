@@ -135,7 +135,7 @@ def water_transitions(
 
         buttons["water_radio_button"].config(state="disabled")
         buttons["icetea_radio_button"].config(state="disabled")
-        buttons["lemonade_radio_btn"].config(state="disabled")
+        buttons["lemonade_radio_button"].config(state="disabled")
 
         coins["coin_small_10"].config(state="normal")
         coins["coin_small_20"].config(state="normal")
@@ -145,23 +145,10 @@ def water_transitions(
 
         buttons["insert_coin_button"].config(state="normal")
         buttons["select_product_button"].config(state="disabled")
+        buttons["reset_button"].config(state="normal")
 
         messageHandler(messages_text, f"{transitionStatus}: Το προϊόν προστέθηκε!")
         waterTransitions["canRunTransition0"] = False
-    # else if not water:
-    #     buttons["water_radio_button"].config(state="normal")
-    #     buttons["icetea_radio_button"].config(state="normal")
-    #     buttons["lemonade_radio_btn"].config(state="normal")
-
-    #     coins["coin_small_10"].config(state="disabled")
-    #     coins["coin_small_20"].config(state="disabled")
-    #     coins["coin_small_50"].config(state="disabled")
-    #     coins["coin_one"].config(state="disabled")
-    #     coins["coin_two"].config(state="disabled")
-
-    #     buttons["insert_coin_button"].config(state="disabled")
-    #     buttons["select_product_button"].config(state="normal")
-
 
     if transition1() or transition9() or transition10():
         canvas.itemconfigure(tokens["token_TK_P7"], state="normal")
