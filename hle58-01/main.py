@@ -1,5 +1,4 @@
 
-# TODO 1 => Cancel button must reset all states to 0
 # TODO 6 => Improve design in tkinter
 # TODO 7 => Create a README documentation for usage and exmplanation what P,T do and represent
 # TODO 8 => Complete the modeling for IceTea and Lemonade
@@ -9,8 +8,16 @@ from helpers import checkCoinLimitHandler, resetHandler
 from petri_models.water.water_model import water_transitions
 from petri_models.water.water_gui import water_gui
 
-# Global Variables
+# Define Variables
 currentValue = 0
+
+tokens = {}
+
+coins = {}
+
+buttons = {}
+
+data = {}
 
 waterTransitions = {
     "canRunTransition0": True,
@@ -28,26 +35,36 @@ waterTransitions = {
 }
 
 productsList = {
-        "water": {
-            "name": "water",
-            "value": 50
-        },
-        "icetea": {
-            "name": "icetea",
-            "value": 210
-        },    
-        "lemonade": {
-            "name": "lemonade",
-            "value": 160
-        }
+    "water": {
+        "name": "water",
+        "value": 50
+    },
+    "icetea": {
+        "name": "icetea",
+        "value": 210
+    },    
+    "lemonade": {
+        "name": "lemonade",
+        "value": 160
     }
+}
 
 def run_petri_net():
     global currentValue
-
+    # Increment currentValue by coin_var.get()
     currentValue += int(coin_var.get())
 
-    # Dictionaries of tkinter objects
+    # Set dictionaries for petrinet
+    tokens = {
+        "token_TK_P1": token_TK_P1,
+        "token_TK_P2": token_TK_P2,
+        "token_TK_P3": token_TK_P3,
+        "token_TK_P4": token_TK_P4,
+        "token_TK_P5": token_TK_P5,
+        "token_TK_P6": token_TK_P6,
+        "token_TK_P7": token_TK_P7,
+    }
+        
     coins = {
         "coin_small_10": coin_small_10,
         "coin_small_20": coin_small_20,
@@ -59,9 +76,10 @@ def run_petri_net():
     buttons = {
         "water_radio_button": water_radio_button,
         "icetea_radio_button": icetea_radio_button,
-        "lemonade_radio_btn": lemonade_radio_btn,
+        "lemonade_radio_button": lemonade_radio_button,
         "insert_coin_button": insert_coin_button,
         "select_product_button": select_product_button,
+        "reset_button": reset_button,
     }
 
     data = {
@@ -74,10 +92,50 @@ def run_petri_net():
     }
     
     checkCoinLimitHandler(drink_var, productsList, currentValue, insert_coin_button)
-
     
     if drink_var.get() == productsList["water"]["name"]:
         water_transitions(tokens, waterTransitions, buttons, coins, **data)
+
+def run_reset():
+    global currentValue
+    currentValue = 0
+
+    # Set dictionaries for reset
+    tokens = {
+        "token_TK_P1": token_TK_P1,
+        "token_TK_P2": token_TK_P2,
+        "token_TK_P3": token_TK_P3,
+        "token_TK_P4": token_TK_P4,
+        "token_TK_P5": token_TK_P5,
+        "token_TK_P6": token_TK_P6,
+        "token_TK_P7": token_TK_P7,
+    }
+
+    buttons = {
+        "water_radio_button": water_radio_button,
+        "icetea_radio_button": icetea_radio_button,
+        "lemonade_radio_button": lemonade_radio_button,
+        "insert_coin_button": insert_coin_button,
+        "select_product_button": select_product_button,
+        "reset_button": reset_button,
+    }
+
+    coins = {
+        "coin_small_10": coin_small_10,
+        "coin_small_20": coin_small_20,
+        "coin_small_50": coin_small_50,
+        "coin_one": coin_one,
+        "coin_two": coin_two,
+    }
+
+    data = {
+        "coin_var": coin_var,
+        "drink_var": drink_var,
+        "canvas": canvas,
+        "messages_text": messages_text,
+    }
+
+    resetHandler(waterTransitions, tokens, buttons, coins, **data)
 
 if __name__ == "__main__":
     root = tk.Tk()
@@ -88,7 +146,7 @@ if __name__ == "__main__":
     # if drink_var.get() == "null":
     water_gui(canvas, tk)
 
-    # # create GUI token
+    # Create GUI token
     token_TK_P1 = canvas.create_oval(40, 85, 50, 95, fill='black', state="normal") 
     token_TK_P2 = canvas.create_oval(220, 85, 230, 95, fill="black", state="hidden")
     token_TK_P3 = canvas.create_oval(400, 35, 410, 45, fill="black", state="hidden")
@@ -97,20 +155,9 @@ if __name__ == "__main__":
     token_TK_P6 = canvas.create_oval(580, 135, 590, 145, fill="black", state="hidden")
     token_TK_P7 = canvas.create_oval(760, 85, 770, 95, fill="black", state="hidden")
 
-    tokens = {
-        "token_TK_P1": token_TK_P1,
-        "token_TK_P2": token_TK_P2,
-        "token_TK_P3": token_TK_P3,
-        "token_TK_P4": token_TK_P4,
-        "token_TK_P5": token_TK_P5,
-        "token_TK_P6": token_TK_P6,
-        "token_TK_P7": token_TK_P7,
-    }
-    
     # Scrollbar
     messages_text = tk.Text(root)
     messages_text.pack(side=tk.LEFT, fill=tk.Y)
-
     scrollbar = tk.Scrollbar(root, command=messages_text.yview)
     messages_text.configure(yscrollcommand=scrollbar.set)
     scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
@@ -122,10 +169,10 @@ if __name__ == "__main__":
     tk.Label(drink_menu, text="Επιλέξτε ποτό:").pack(anchor="c")
     water_radio_button = tk.Radiobutton(drink_menu, text="Νερό (€0.50)", variable=drink_var, state="normal", value="water")
     icetea_radio_button = tk.Radiobutton(drink_menu, text="Παγωμένο τσάι (€2.10)", variable=drink_var, state="disabled", value="icetea")
-    lemonade_radio_btn = tk.Radiobutton(drink_menu, text="Λεμονάδα (€1.60)", variable=drink_var, state="disabled", value="lemonade")
+    lemonade_radio_button = tk.Radiobutton(drink_menu, text="Λεμονάδα (€1.60)", variable=drink_var, state="disabled", value="lemonade")
     water_radio_button.pack(anchor="c")
     icetea_radio_button.pack(anchor="c")
-    lemonade_radio_btn.pack(anchor="c")
+    lemonade_radio_button.pack(anchor="c")
     drink_menu.pack(anchor="c")
 
     # Create a coin menu with radio buttons
@@ -147,9 +194,9 @@ if __name__ == "__main__":
     # create action buttons
     select_product_button = tk.Button(root, text="Επιλέξτε προϊόν", state="normal", command=run_petri_net)
     insert_coin_button = tk.Button(root, text="Εισάγετε κέρμα", state="disabled", command=run_petri_net)
-    # reset_vending_machine_button = tk.Button(root, text="Ακύρωση", state="normal", command=lambda: resetHandler(canvas, drink_var, coin_var, waterTransitions, tokens))
+    reset_button = tk.Button(root, text="Ακύρωση", state="disabled", command=run_reset)
     select_product_button.pack()
     insert_coin_button.pack()
-    # reset_vending_machine_button.pack()
+    reset_button.pack()
 
     root.mainloop()

@@ -78,26 +78,35 @@ def remainingValueHandler(drink_var, productsList, currentValue):
     
 
 
-def resetHandler(canvas, drink_var, coin_var, waterTransitions, tokens):
+def resetHandler(waterTransitions, tokens, buttons, coins, coin_var, drink_var, canvas, messages_text):
     """"Resets the vending machine"""
     drink_var.set("null")
     coin_var.set(0)
-    # water_radio_button.config(state="normal")
-    # icetea_radio_button.config(state="normal")
-    # lemonade_radio_btn.config(state="normal")
-    # coin_small_10.config(state="disabled")
-    # coin_small_20.config(state="disabled")
-    # coin_small_50.config(state="disabled")
-    # coin_one.config(state="disabled")
-    # coin_two.config(state="disabled")
-    # insert_coin_button.config(state="disabled")
-    # select_product_button.config(state="normal")
+
+    buttons["water_radio_button"].config(state="normal")
+    buttons["icetea_radio_button"].config(state="normal")
+    buttons["lemonade_radio_button"].config(state="normal")
+
+    coins["coin_small_10"].config(state="disabled")
+    coins["coin_small_20"].config(state="disabled")
+    coins["coin_small_50"].config(state="disabled")
+    coins["coin_one"].config(state="disabled")
+    coins["coin_two"].config(state="disabled")
+
+    buttons["insert_coin_button"].config(state="disabled")
+    buttons["select_product_button"].config(state="normal")
+    buttons["reset_button"].config(state="disabled")
 
     for transition in waterTransitions:
-        waterTransitions[transition] = False
+        if transition == "canRunTransition0":
+            waterTransitions[transition] = True
+        else:
+            waterTransitions[transition] = False
 
     for token_name, token in tokens.items():
         if token_name == "token_TK_P1":
             canvas.itemconfig(token, state="normal")
         else:
             canvas.itemconfig(token, state="hidden")
+
+    messageHandler(messages_text, "=" * 80)
