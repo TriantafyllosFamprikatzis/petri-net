@@ -6,7 +6,15 @@
 import tkinter as tk
 from helpers import checkCoinLimitHandler, resetHandler
 from petri_models.water.water_model import water_transitions
-from petri_models.water.water_gui import water_gui
+from petri_models.water.water1_gui import water_gui
+
+"""from petri_models.iced_tea.iced_tea_model import iced_tea_transitions
+from petri_models.iced_tea.iced_tea_gui import iced_tea_gui
+"""
+
+"""from petri_models.lemonade.lemonade_model import lemonade_transitions
+from petri_models.lemonade.lemonade_gui import lemonade_gui
+"""
 
 # Define Variables
 currentValue = 0
@@ -33,6 +41,57 @@ waterTransitions = {
     "prevTransition9": False,
     "prevTransition10": False
 }
+"""iced_teaTransitions = {
+    "canRunTransition0": True,
+    "prevTransition0": False,
+    "prevTransition1": False,
+    "prevTransition2": False,
+    "prevTransition3": False,
+    "prevTransition4": False,
+    "prevTransition5": False,
+    "prevTransition6": False,
+    "prevTransition7": False,
+    "prevTransition8": False,
+    "prevTransition9": False,
+    "prevTransition10": False,
+    "prevTransition11": False,
+    "prevTransition12": False,
+    "prevTransition13": False,
+    "prevTransition14": False,
+    "prevTransition15": False,
+    "prevTransition16": False
+"""
+
+"""lemonadeTransitions = {
+    "canRunTransition0": True,
+    "prevTransition0": False,
+    "prevTransition1": False,
+    "prevTransition2": False,
+    "prevTransition3": False,
+    "prevTransition4": False,
+    "prevTransition5": False,
+    "prevTransition6": False,
+    "prevTransition7": False,
+    "prevTransition8": False,
+    "prevTransition9": False,
+    "prevTransition10": False,
+    "prevTransition11": False,
+    "prevTransition12": False,
+    "prevTransition13": False,
+    "prevTransition14": False,
+    "prevTransition15": False,
+    "prevTransition16": False,
+    "prevTransition17": False,
+    "prevTransition18": False,
+    "prevTransition19": False,
+    "prevTransition20": False,
+    "prevTransition21": False,
+    "prevTransition22": False,
+    "prevTransition23": False,
+    "prevTransition24": False,
+    "prevTransition25": False,
+}
+"""
 
 productsList = {
     "water": {
@@ -41,11 +100,11 @@ productsList = {
     },
     "icetea": {
         "name": "icetea",
-        "value": 210
+        "value": 70
     },    
     "lemonade": {
         "name": "lemonade",
-        "value": 160
+        "value": 110
     }
 }
 
@@ -63,6 +122,12 @@ def run_petri_net():
         "token_TK_P5": token_TK_P5,
         "token_TK_P6": token_TK_P6,
         "token_TK_P7": token_TK_P7,
+        "token_TK_P8": token_TK_P8,
+        "token_TK_P9": token_TK_P9,
+        "token_TK_P10": token_TK_P10,
+        "token_TK_P11": token_TK_P11,
+        "token_TK_P12": token_TK_P12,
+        "token_TK_P13": token_TK_P13,
     }
         
     coins = {
@@ -96,6 +161,14 @@ def run_petri_net():
     if drink_var.get() == productsList["water"]["name"]:
         water_transitions(tokens, waterTransitions, buttons, coins, **data)
 
+"""if drink_var.get() == productsList["icetea"]["name"]:
+        icedtea_transitions(tokens, icedteaTransitions, buttons, coins, **data)
+"""
+
+"""if drink_var.get() == productsList["lemonade"]["name"]:
+        lemonade_transitions(tokens, lemonadeTransitions, buttons, coins, **data)
+"""
+
 def run_reset():
     global currentValue
     currentValue = 0
@@ -109,6 +182,12 @@ def run_reset():
         "token_TK_P5": token_TK_P5,
         "token_TK_P6": token_TK_P6,
         "token_TK_P7": token_TK_P7,
+        "token_TK_P8": token_TK_P8,
+        "token_TK_P9": token_TK_P9,
+        "token_TK_P10": token_TK_P10,
+        "token_TK_P11": token_TK_P11,
+        "token_TK_P12": token_TK_P12,
+        "token_TK_P13": token_TK_P13,
     }
 
     buttons = {
@@ -137,6 +216,12 @@ def run_reset():
 
     resetHandler(waterTransitions, tokens, buttons, coins, **data)
 
+"""resetHandler(icedteaTransitions, tokens, buttons, coins, **data)
+"""
+
+"""resetHandler(lemonadeTransitions, tokens, buttons, coins, **data)
+"""
+
 if __name__ == "__main__":
     root = tk.Tk()
     canvas = tk.Canvas(root, width=1000, height=300)
@@ -146,20 +231,26 @@ if __name__ == "__main__":
     # if drink_var.get() == "null":
     water_gui(canvas, tk)
 
+    """icedtea_gui(canvas, tk)
+    """
+
+    """lemonade_gui(canvas, tk)
+    """
+
     # Create GUI token
-    token_TK_P1 = canvas.create_oval(22, 17, 38, 33, fill='red', state="normal")
-    token_TK_P2 = canvas.create_oval(102, 82, 118, 98, fill="red", state="hidden")
-    token_TK_P3 = canvas.create_oval(272, 32, 288, 48, fill="red", state="hidden")
-    token_TK_P4 = canvas.create_oval(272, 132, 288, 148, fill="red", state="hidden")
-    token_TK_P5 = canvas.create_oval(432, 32, 448, 48, fill="red", state="hidden")
-    token_TK_P6 = canvas.create_oval(432, 132, 448, 148, fill="red", state="hidden")
-    token_TK_P7 = canvas.create_oval(592, 32, 608, 48, fill="red", state="hidden")
-    token_TK_P8 = canvas.create_oval(592, 132, 608, 148, fill="red", state="hidden")
-    token_TK_P9 = canvas.create_oval(752, 32, 768, 48, fill="red", state="hidden")
-    token_TK_P10 = canvas.create_oval(752, 132, 768, 148, fill="red", state="hidden")
-    token_TK_P11 = canvas.create_oval(912, 32, 928, 48, fill="red", state="hidden")
-    token_TK_P12 = canvas.create_oval(912, 132, 928, 148, fill="red", state="hidden")
-    token_TK_P13 = canvas.create_oval(977, 82, 993, 98, fill="red", state="hidden")
+    token_TK_P1 = canvas.create_oval(15, 10, 45, 40, fill='red', state="normal")
+    token_TK_P2 = canvas.create_oval(95, 75, 125, 105, fill="red", state="hidden")
+    token_TK_P3 = canvas.create_oval(265,25,295,55, fill="red", state="hidden")
+    token_TK_P4 = canvas.create_oval(265, 125, 295, 155, fill="red", state="hidden")
+    token_TK_P5 = canvas.create_oval(425,25,455,55, fill="red", state="hidden")
+    token_TK_P6 = canvas.create_oval(425,125,455,155, fill="red", state="hidden")
+    token_TK_P7 = canvas.create_oval(585, 25, 615, 55, fill="red", state="hidden")
+    token_TK_P8 = canvas.create_oval(585, 125, 615, 155, fill="red", state="hidden")
+    token_TK_P9 = canvas.create_oval(745, 25, 775, 55, fill="red", state="hidden")
+    token_TK_P10 = canvas.create_oval(745, 125, 775, 155, fill="red", state="hidden")
+    token_TK_P11 = canvas.create_oval(905, 25, 935, 55, fill="red", state="hidden")
+    token_TK_P12 = canvas.create_oval(905, 125, 935, 155, fill="red", state="hidden")
+    token_TK_P13 = canvas.create_oval(970,75,1000,105, fill="red", state="hidden")
 
     # Scrollbar
     messages_text = tk.Text(root)
@@ -174,8 +265,8 @@ if __name__ == "__main__":
     tk.Label(drink_menu, text="Menu").pack(anchor="c")
     tk.Label(drink_menu, text="Επιλέξτε ποτό:").pack(anchor="c")
     water_radio_button = tk.Radiobutton(drink_menu, text="Νερό (€0.50)", variable=drink_var, state="normal", value="water")
-    icetea_radio_button = tk.Radiobutton(drink_menu, text="Παγωμένο τσάι (€2.10)", variable=drink_var, state="disabled", value="icetea")
-    lemonade_radio_button = tk.Radiobutton(drink_menu, text="Λεμονάδα (€1.60)", variable=drink_var, state="disabled", value="lemonade")
+    icetea_radio_button = tk.Radiobutton(drink_menu, text="Παγωμένο τσάι (€0.70)", variable=drink_var, state="disabled", value="icetea")
+    lemonade_radio_button = tk.Radiobutton(drink_menu, text="Λεμονάδα (€1.10)", variable=drink_var, state="disabled", value="lemonade")
     water_radio_button.pack(anchor="c")
     icetea_radio_button.pack(anchor="c")
     lemonade_radio_button.pack(anchor="c")
