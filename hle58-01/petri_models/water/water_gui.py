@@ -1,4 +1,4 @@
-
+"""
 def water_gui(canvas, tk):
     # create GUI places and texts
     place_initial_state_TK = canvas.create_oval(30, 75, 60, 105, outline='black', width=2)#p1
@@ -72,4 +72,4 @@ def water_gui(canvas, tk):
     line = canvas.create_line(700, 140, 740, 110, arrow=tk.LAST)#t10-p8
     # line = canvas.create_line(790, 90, 830, 90, arrow=tk.LAST)#p8-t11
     # line = canvas.create_line(880, 90, 920, 90, arrow=tk.LAST)#t11-p9
-    # line = canvas.create_line(855, 110, 855, 150, arrow=tk.LAST)#t11-p10
+    # line = canvas.create_line(855, 110, 855, 150, arrow=tk.LAST)#t11-p10"""

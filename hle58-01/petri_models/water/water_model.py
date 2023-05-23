@@ -151,8 +151,8 @@ def water_transitions(
         waterTransitions["canRunTransition0"] = False
 
     if transition1() or transition9() or transition10():
-        canvas.itemconfigure(tokens["token_TK_P7"], state="normal")
-        tokenHandler(canvas, "token_TK_P7", tokens)
+        canvas.itemconfigure(tokens["token_TK_P13"], state="normal")
+        tokenHandler(canvas, "token_TK_P13", tokens)
         changeAmount = calculateChangeHandler(drink_var, productsList, currentValue)
         insertedAmount = numberConverterHandler(coin_var.get())
         messageHandler(messages_text, f"{transitionStatus}: Εισαγωγή νομίσματος: €{insertedAmount}, το ποσό συμπληρώθηκε, έδωσε ρέστα €{changeAmount}")
