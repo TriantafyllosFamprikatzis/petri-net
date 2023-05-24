@@ -33,27 +33,7 @@ def iced_tea_transitions(
             return True
         else:
             return False
-
-    def transition15():
-        global transitionStatus
-        if currentValue == 50 and iced_teaTransitions["prevTransition0"]:
-            iced_teaTransitions["prevTransition0"] = False
-            iced_teaTransitions["prevTransition15"] = True
-            transitionStatus = "T15"
-            return True
-        else:
-            return False
-
-    def transition16():
-        global transitionStatus
-        if currentValue == 100 and (iced_teaTransitions["prevTransition0"] or iced_teaTransitions["prevTransition15"]):
-            iced_teaTransitions["prevTransition15"] = False
-            iced_teaTransitions["prevTransition16"] = True
-            transitionStatus = "T16"
-            return True
-        else:
-            return False
-        
+    
     def transition2():
         global transitionStatus
         if currentValue == 10 and iced_teaTransitions["prevTransition0"]:
@@ -189,6 +169,26 @@ def iced_tea_transitions(
             iced_teaTransitions["prevTransition8"] = False
             iced_teaTransitions["prevTransition10"] = True
             transitionStatus = "T14"
+            return True
+        else:
+            return False
+        
+    def transition15():
+        global transitionStatus
+        if currentValue == 50 and iced_teaTransitions["prevTransition0"]:
+            iced_teaTransitions["prevTransition0"] = False
+            iced_teaTransitions["prevTransition15"] = True
+            transitionStatus = "T15"
+            return True
+        else:
+            return False
+
+    def transition16():
+        global transitionStatus
+        if currentValue == 100 and (iced_teaTransitions["prevTransition0"] or iced_teaTransitions["prevTransition15"]):
+            iced_teaTransitions["prevTransition15"] = False
+            iced_teaTransitions["prevTransition16"] = True
+            transitionStatus = "T16"
             return True
         else:
             return False
