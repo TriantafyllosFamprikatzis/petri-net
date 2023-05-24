@@ -6,7 +6,7 @@
 import tkinter as tk
 from helpers import checkCoinLimitHandler, resetHandler
 from petri_models.water.water_model import water_transitions
-from petri_models.water.water1_gui import water_gui
+from petri_models.water.water_gui import water_gui
 
 """from petri_models.iced_tea.iced_tea_model import iced_tea_transitions
 from petri_models.iced_tea.iced_tea_gui import iced_tea_gui
