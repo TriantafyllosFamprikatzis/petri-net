@@ -60,6 +60,8 @@ def iced_tea_gui(canvas, tk):
     line = canvas.create_line(130, 100, 170, 130, arrow=tk.LAST)#p2-t3
     line = canvas.create_line(110, 115, 110, 190, 460, 190, arrow=tk.LAST)#p2-t1 830
     line = canvas.create_line(500, 190, 980, 190, 980, 110, arrow=tk.LAST)#t1-final
+    line = canvas.create_line(110, 70, 110, 15, 340, 15, arrow=tk.LAST)#p2-t15
+    line = canvas.create_line(380, 15, 600, 15, 600, 17, arrow=tk.LAST)#t15-final
     line = canvas.create_line(215, 40, 260, 40, arrow=tk.LAST)#t2-p3
     line = canvas.create_line(215, 140, 260, 140, arrow=tk.LAST)#t3-p4
     line = canvas.create_line(280, 60, 280, 75, arrow=tk.LAST)#p3-t4
