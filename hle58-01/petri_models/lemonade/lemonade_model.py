@@ -8,7 +8,7 @@ from helpers import (
 # Global variables
 transitionStatus = str()
 
-# Define the Petri net transitions for icetea
+# Define the Petri net transitions for lemonade
 def lemonade_transitions(
         tokens, lemonadeTransitions, buttons, coins, drink_var, coin_var, currentValue,
         productsList, canvas, messages_text,
@@ -34,37 +34,7 @@ def lemonade_transitions(
         else:
             return False
 
-    def transition21():
-        global transitionStatus
-        if currentValue == 50 and lemonadeTransitions["prevTransition0"]:
-            lemonadeTransitions["prevTransition0"] = False
-            lemonadeTransitions["prevTransition21"] = True
-            transitionStatus = "T21"
-            return True
-        else:
-            return False
-
-    def transition22():
-        global transitionStatus
-        if currentValue == 100 and (lemonadeTransitions["prevTransition0"] or lemonadeTransitions["prevTransition9"] or lemonadeTransitions["prevTransition10"] or lemonadeTransitions["prevTransition21"]):
-            lemonadeTransitions["prevTransition21"] = False
-            lemonadeTransitions["prevTransition9"] = False
-            lemonadeTransitions["prevTransition10"] = False
-            lemonadeTransitions["prevTransition22"] = True
-            transitionStatus = "T22"
-            return True
-        else:
-            return False
-
-    def transition23():
-        global transitionStatus
-        if currentValue == 100 and lemonadeTransitions["prevTransition0"]:
-            lemonadeTransitions["prevTransition0"] = False
-            lemonadeTransitions["prevTransition23"] = True
-            transitionStatus = "T23"
-            return True
-        else:
-            return False
+    
         
     def transition2():
         global transitionStatus
@@ -272,7 +242,37 @@ def lemonade_transitions(
         else:
             return False
 
-    
+    def transition21():
+        global transitionStatus
+        if currentValue == 50 and lemonadeTransitions["prevTransition0"]:
+            lemonadeTransitions["prevTransition0"] = False
+            lemonadeTransitions["prevTransition21"] = True
+            transitionStatus = "T21"
+            return True
+        else:
+            return False
+
+    def transition22():
+        global transitionStatus
+        if currentValue == 100 and (lemonadeTransitions["prevTransition0"] or lemonadeTransitions["prevTransition9"] or lemonadeTransitions["prevTransition10"] or lemonadeTransitions["prevTransition21"]):
+            lemonadeTransitions["prevTransition21"] = False
+            lemonadeTransitions["prevTransition9"] = False
+            lemonadeTransitions["prevTransition10"] = False
+            lemonadeTransitions["prevTransition22"] = True
+            transitionStatus = "T22"
+            return True
+        else:
+            return False
+
+    def transition23():
+        global transitionStatus
+        if currentValue == 100 and lemonadeTransitions["prevTransition0"]:
+            lemonadeTransitions["prevTransition0"] = False
+            lemonadeTransitions["prevTransition23"] = True
+            transitionStatus = "T23"
+            return True
+        else:
+            return False
 
     def transition24():
         global transitionStatus
