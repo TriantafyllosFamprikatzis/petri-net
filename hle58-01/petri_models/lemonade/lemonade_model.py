@@ -26,7 +26,7 @@ def lemonade_transitions(
         
     def transition1():
         global transitionStatus
-        if currentValue >= productsList["icetea"]["value"] and lemonadeTransitions["prevTransition0"]:
+        if currentValue >= productsList["lemonade"]["value"] and lemonadeTransitions["prevTransition0"]:
             lemonadeTransitions["prevTransition0"] = False
             lemonadeTransitions["prevTransition1"] = True
             transitionStatus = "T1"

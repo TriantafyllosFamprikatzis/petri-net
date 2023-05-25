@@ -30,8 +30,8 @@ def calculateChangeHandler(drink_var, productsList, currentValue):
     if drink_var.get() == productsList["water"]["name"] and currentValue > productsList["water"]["value"]:
         result = currentValue - productsList["water"]["value"]
         return numberConverterHandler(result)
-    if drink_var.get() == productsList["icetea"]["name"] and currentValue > productsList["icetea"]["value"]:
-        result = currentValue - productsList["icetea"]["value"]                                           
+    if drink_var.get() == productsList["ice_tea"]["name"] and currentValue > productsList["ice_tea"]["value"]:
+        result = currentValue - productsList["ice_tea"]["value"]                                           
         return numberConverterHandler(result)
     if drink_var.get() == productsList["lemonade"]["name"] and currentValue > productsList["lemonade"]["value"]:
         result = currentValue - productsList["lemonade"]["value"]
@@ -50,8 +50,8 @@ def checkCoinLimitHandler(drink_var, productsList, currentValue, insert_coin_but
         if currentValue >= productsList["water"]["value"]:
             insert_coin_button.config(state="disabled")
 
-    if drink_var.get() == productsList["icetea"]["name"]:
-        if currentValue >= productsList["icetea"]["value"]:
+    if drink_var.get() == productsList["ice_tea"]["name"]:
+        if currentValue >= productsList["ice_tea"]["value"]:
             insert_coin_button.config(state="disabled")
 
     if drink_var.get() == productsList["lemonade"]["name"]:
@@ -68,8 +68,8 @@ def remainingValueHandler(drink_var, productsList, currentValue):
         result = productsList["water"]["value"] - currentValue 
         return numberConverterHandler(result)
 
-    if drink_var.get() == productsList["icetea"]["name"]:
-        result = productsList["icetea"]["value"] - currentValue 
+    if drink_var.get() == productsList["ice_tea"]["name"]:
+        result = productsList["ice_tea"]["value"] - currentValue 
         return numberConverterHandler(result)
 
     if drink_var.get() == productsList["lemonade"]["name"]:
@@ -78,7 +78,7 @@ def remainingValueHandler(drink_var, productsList, currentValue):
     
 
 
-def resetHandler(waterTransitions, tokens, buttons, coins, coin_var, drink_var, canvas, messages_text):
+def resetHandler(transitions, tokens, buttons, coins, coin_var, drink_var, canvas, messages_text):
     """"Resets the vending machine"""
     drink_var.set("null")
     coin_var.set(0)
@@ -97,11 +97,11 @@ def resetHandler(waterTransitions, tokens, buttons, coins, coin_var, drink_var, 
     buttons["select_product_button"].config(state="normal")
     buttons["reset_button"].config(state="disabled")
 
-    for transition in waterTransitions:
+    for transition in transitions:
         if transition == "canRunTransition0":
-            waterTransitions[transition] = True
+            transitions[transition] = True
         else:
-            waterTransitions[transition] = False
+            transitions[transition] = False
 
     for token_name, token in tokens.items():
         if token_name == "token_TK_P1":
