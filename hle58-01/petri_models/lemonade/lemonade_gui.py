@@ -32,7 +32,7 @@ def lemonade_gui(canvas, tk):
     # create GUI transitions
     T0_TK = canvas.create_rectangle(15, 80, 45, 100, outline='black', width=2, tags="lemonade")  # picked product
     textt0 = canvas.create_text(30, 90, text='T0', tags="lemonade")
-    T1_TK = canvas.create_rectangle(465, 180, 495, 200, outline='black', width=2, tags="lemonade")  # +50
+    T1_TK = canvas.create_rectangle(465, 180, 495, 200, outline='black', width=2, tags="lemonade")  # +200
     textt1 = canvas.create_text(480, 190, text='T1', tags="lemonade")
     T2_TK = canvas.create_rectangle(180, 30, 210, 50, outline='black', width=2, tags="lemonade")  # +10
     textt2 = canvas.create_text(195, 40, text='T2', tags="lemonade")
@@ -52,26 +52,36 @@ def lemonade_gui(canvas, tk):
     textt9 = canvas.create_text(520, 40, text='T9', tags="lemonade")
     T10_TK = canvas.create_rectangle(505, 80, 535, 100, outline='black', width=2, tags="lemonade")  # 40+10
     textt10 = canvas.create_text(520, 90, text='T10', tags="lemonade")
-    T11_TK = canvas.create_rectangle(505, 130, 535, 150, outline='black', width=2, tags="lemonade")
+    T11_TK = canvas.create_rectangle(505, 130, 535, 150, outline='black', width=2, tags="lemonade") #40+20
     textt11 = canvas.create_text(520, 140, text='T11', tags="lemonade")
-    T12_TK = canvas.create_rectangle(585, 80, 615, 100, outline='black', width=2, tags="lemonade")
-    textt11 = canvas.create_text(600, 90, text='T12', tags="lemonade")
-    T13_TK = canvas.create_rectangle(665, 30, 695, 50, outline='black', width=2, tags="lemonade")
-    textt11 = canvas.create_text(680, 40, text='T13', tags="lemonade")
-    T14_TK = canvas.create_rectangle(665, 80, 695, 100, outline='black', width=2, tags="lemonade")
-    textt11 = canvas.create_text(680, 90, text='T14', tags="lemonade")
-    T15_TK = canvas.create_rectangle(665, 130, 695, 150, outline='black', width=2, tags="lemonade")
-    textt11 = canvas.create_text(680, 140, text='T15', tags="lemonade")
-    T16_TK = canvas.create_rectangle(745, 80, 775, 100, outline='black', width=2, tags="lemonade")
-    textt11 = canvas.create_text(760, 90, text='T16', tags="lemonade")
-    T17_TK = canvas.create_rectangle(825, 30, 855, 50, outline='black', width=2, tags="lemonade")
-    textt11 = canvas.create_text(840, 40, text='T17', tags="lemonade")
-    T18_TK = canvas.create_rectangle(825, 80, 855, 100, outline='black', width=2, tags="lemonade")
-    textt11 = canvas.create_text(840, 90, text='T18', tags="lemonade")
-    T19_TK = canvas.create_rectangle(825, 130, 855, 150, outline='black', width=2, tags="lemonade")
-    textt11 = canvas.create_text(840, 140, text='T19', tags="lemonade")
-    T20_TK = canvas.create_rectangle(905, 80, 935, 100, outline='black', width=2, tags="lemonade")
-    textt11 = canvas.create_text(920, 90, text='T20', tags="lemonade")
+    T12_TK = canvas.create_rectangle(585, 80, 615, 100, outline='black', width=2, tags="lemonade") #50+10
+    textt12 = canvas.create_text(600, 90, text='T12', tags="lemonade")
+    T13_TK = canvas.create_rectangle(665, 30, 695, 50, outline='black', width=2, tags="lemonade") #50+20
+    textt13 = canvas.create_text(680, 40, text='T13', tags="lemonade")
+    T14_TK = canvas.create_rectangle(665, 80, 695, 100, outline='black', width=2, tags="lemonade") #60+10
+    textt14 = canvas.create_text(680, 90, text='T14', tags="lemonade")
+    T15_TK = canvas.create_rectangle(665, 130, 695, 150, outline='black', width=2, tags="lemonade") #60+20
+    textt15 = canvas.create_text(680, 140, text='T15', tags="lemonade")
+    T16_TK = canvas.create_rectangle(745, 80, 775, 100, outline='black', width=2, tags="lemonade") #70+10
+    textt16 = canvas.create_text(760, 90, text='T16', tags="lemonade")
+    T17_TK = canvas.create_rectangle(825, 30, 855, 50, outline='black', width=2, tags="lemonade") #70+20
+    textt17 = canvas.create_text(840, 40, text='T17', tags="lemonade")
+    T18_TK = canvas.create_rectangle(825, 80, 855, 100, outline='black', width=2, tags="lemonade") #80+10
+    textt18 = canvas.create_text(840, 90, text='T18', tags="lemonade")
+    T19_TK = canvas.create_rectangle(825, 130, 855, 150, outline='black', width=2, tags="lemonade") #80+20
+    textt19 = canvas.create_text(840, 140, text='T19', tags="lemonade")
+    T20_TK = canvas.create_rectangle(905, 80, 935, 100, outline='black', width=2, tags="lemonade") #90+10
+    textt20 = canvas.create_text(920, 90, text='T20', tags="lemonade")
+    T21_TK = canvas.create_rectangle(345, 5, 375, 25, outline='black', width=2, tags="lemonade")#+50
+    textt21 = canvas.create_text(360, 15, text='T21', tags="lemonade")
+    T22_TK = canvas.create_rectangle(665, 5, 695, 25, outline='black', width=2, tags="lemonade")#50+50
+    textt22 = canvas.create_text(680, 15, text='T22', tags="lemonade")
+    T23_TK = canvas.create_rectangle(825, 155, 855, 175, outline='black', width=2, tags="lemonade")#50+50
+    textt23 = canvas.create_text(840, 165, text='T23', tags="lemonade")
+    T24_TK = canvas.create_rectangle(950, 36, 975, 56, outline='black', width=2, tags="lemonade")#90+20
+    textt24 = canvas.create_text(962, 46, text='T24', tags="lemonade")
+    T25_TK = canvas.create_rectangle(950, 125, 975, 145, outline='black', width=2, tags="lemonade")#100+10
+    textt25 = canvas.create_text(962, 135, text='T25', tags="lemonade")
 
     # create GUI arrows
     line = canvas.create_line(30, 45, 30, 75, arrow=tk.LAST, tags="lemonade")  # p1 - t0
@@ -95,27 +105,34 @@ def lemonade_gui(canvas, tk):
     line = canvas.create_line(460, 40, 500, 40, arrow=tk.LAST, tags="lemonade")  # p5-t9
     line = canvas.create_line(460, 140, 500, 140, arrow=tk.LAST, tags="lemonade")  # p6 - t11
     line = canvas.create_line(460, 130, 500, 100, arrow=tk.LAST, tags="lemonade")  # p6-t10
-    line = canvas.create_line(540, 80, 580, 50, arrow=tk.LAST, tags="lemonade")#t10-p7
-    line = canvas.create_line(540, 40, 580, 40, arrow=tk.LAST, tags="lemonade")#t9-p7
-    line = canvas.create_line(540, 140, 580, 140, arrow=tk.LAST, tags="lemonade")#t11-p8
-    line = canvas.create_line(600, 60, 600, 75, arrow=tk.LAST, tags="lemonade")#p7-t12
-    line = canvas.create_line(600, 105, 600, 120, arrow=tk.LAST, tags="lemonade")#t12-p8
-    line = canvas.create_line(620, 40, 660, 40, arrow=tk.LAST, tags="lemonade")#p7-t13
-    line = canvas.create_line(620, 140, 660, 140, arrow=tk.LAST, tags="lemonade")#p8-t15
-    line = canvas.create_line(620, 130, 660, 100, arrow=tk.LAST, tags="lemonade")#p8-t14
-    line = canvas.create_line(700, 80, 740, 50, arrow=tk.LAST, tags="lemonade")#t14-p9
-    line = canvas.create_line(700, 40, 740, 40, arrow=tk.LAST, tags="lemonade")#t13-p9
-    line = canvas.create_line(700, 140, 740, 140, arrow=tk.LAST, tags="lemonade")#t15-p10
-    line = canvas.create_line(760, 60, 760, 75, arrow=tk.LAST, tags="lemonade")#p9-t16
-    line = canvas.create_line(760, 105, 760, 120, arrow=tk.LAST, tags="lemonade")#t16-p10
-    line = canvas.create_line(780, 40, 820, 40, arrow=tk.LAST, tags="lemonade")#p9-t17
-    line = canvas.create_line(780, 140, 820, 140, arrow=tk.LAST, tags="lemonade")#p10-t19
-    line = canvas.create_line(780, 130, 820, 100, arrow=tk.LAST, tags="lemonade")#p10-t18
-    line = canvas.create_line(860, 80, 900, 50, arrow=tk.LAST, tags="lemonade")#t18-p11
-    line = canvas.create_line(920, 60, 920, 75, arrow=tk.LAST, tags="lemonade")#p11-t20
-    line = canvas.create_line(920, 105, 920, 120, arrow=tk.LAST, tags="lemonade")#t20-p12
-    line = canvas.create_line(860, 40, 900, 40, arrow=tk.LAST, tags="lemonade")#t17-p11
-    line = canvas.create_line(860, 140, 900, 140, arrow=tk.LAST, tags="lemonade")#t19-p12
-    line = canvas.create_line(940, 50, 965, 80, arrow=tk.LAST, tags="lemonade")#p11-final
-    line = canvas.create_line(940, 130, 965, 100, arrow=tk.LAST, tags="lemonade")#p12-final
-
+    line = canvas.create_line(540, 80, 580, 50, arrow=tk.LAST, tags="lemonade") #t10-p7
+    line = canvas.create_line(540, 40, 580, 40, arrow=tk.LAST, tags="lemonade") #t9-p7
+    line = canvas.create_line(540, 140, 580, 140, arrow=tk.LAST, tags="lemonade") #t11-p8
+    line = canvas.create_line(600, 60, 600, 75, arrow=tk.LAST, tags="lemonade") #p7-t12
+    line = canvas.create_line(600, 105, 600, 120, arrow=tk.LAST, tags="lemonade") #t12-p8
+    line = canvas.create_line(620, 40, 660, 40, arrow=tk.LAST, tags="lemonade") #p7-t13
+    line = canvas.create_line(620, 140, 660, 140, arrow=tk.LAST, tags="lemonade") #p8-t15
+    line = canvas.create_line(620, 130, 660, 100, arrow=tk.LAST, tags="lemonade") #p8-t14
+    line = canvas.create_line(700, 80, 740, 50, arrow=tk.LAST, tags="lemonade") #t14-p9
+    line = canvas.create_line(700, 40, 740, 40, arrow=tk.LAST, tags="lemonade") #t13-p9
+    line = canvas.create_line(700, 140, 740, 140, arrow=tk.LAST, tags="lemonade") #t15-p10
+    line = canvas.create_line(760, 60, 760, 75, arrow=tk.LAST, tags="lemonade") #p9-t16
+    line = canvas.create_line(760, 105, 760, 120, arrow=tk.LAST, tags="lemonade") #t16-p10
+    line = canvas.create_line(780, 40, 820, 40, arrow=tk.LAST, tags="lemonade") #p9-t17
+    line = canvas.create_line(780, 140, 820, 140, arrow=tk.LAST, tags="lemonade") #p10-t19
+    line = canvas.create_line(780, 130, 820, 100, arrow=tk.LAST, tags="lemonade") #p10-t18
+    line = canvas.create_line(860, 80, 900, 50, arrow=tk.LAST, tags="lemonade") #t18-p11
+    line = canvas.create_line(920, 60, 920, 75, arrow=tk.LAST, tags="lemonade") #p11-t20
+    line = canvas.create_line(920, 105, 920, 120, arrow=tk.LAST, tags="lemonade") #t20-p12
+    line = canvas.create_line(860, 40, 900, 40, arrow=tk.LAST, tags="lemonade") #t17-p11
+    line = canvas.create_line(860, 140, 900, 140, arrow=tk.LAST, tags="lemonade") #t19-p12
+    line = canvas.create_line(942, 40, 948, 43, arrow=tk.LAST, tags="lemonade") #p11-t24
+    line = canvas.create_line(970, 60, 975, 70, arrow=tk.LAST, tags="lemonade") #t24-final
+    line = canvas.create_line(940, 140, 947, 140, arrow=tk.LAST, tags="lemonade") #p12-t25
+    line = canvas.create_line(960, 115, 968, 100, arrow=tk.LAST, tags="lemonade") #t25-p13
+    line = canvas.create_line(110, 70, 110, 15, 340, 15, arrow=tk.LAST, tags="lemonade") #p2-t21
+    line = canvas.create_line(380, 15, 520, 15, 580, 25, arrow=tk.LAST, tags="lemonade") #t21-p7
+    line = canvas.create_line(620, 35, 660, 15, arrow=tk.LAST, tags="lemonade") #p7-t22
+    line = canvas.create_line(700, 15, 720, 20, 720, 220, 900, 220, 900, 175, 905, 152, arrow=tk.LAST, tags="lemonade") #t22-final
+    line = canvas.create_line(120, 110, 120, 165, 820, 165, arrow=tk.LAST, tags="lemonade") #p2-t23
+    line = canvas.create_line(860, 165, 920, 165, 920, 160, arrow=tk.LAST, tags="lemonade") #t23-p12
