@@ -1,20 +1,14 @@
-
-# TODO 6 => Improve design in tkinter
-# TODO 7 => Create a README documentation for usage and exmplanation what P,T do and represent
-# TODO 8 => Complete the modeling for IceTea and Lemonade
-
 import tkinter as tk
 from helpers import checkCoinLimitHandler, resetHandler
 from petri_models.water.water_model import water_transitions
 from petri_models.water.water_gui import water_gui
 
-"""from petri_models.iced_tea.iced_tea_model import iced_tea_transitions
-from petri_models.iced_tea.iced_tea_gui import iced_tea_gui
-"""
+from petri_models.ice_tea.ice_tea_model import ice_tea_transitions
+from petri_models.ice_tea.ice_tea_gui import ice_tea_gui
 
-"""from petri_models.lemonade.lemonade_model import lemonade_transitions
+
+from petri_models.lemonade.lemonade_model import lemonade_transitions
 from petri_models.lemonade.lemonade_gui import lemonade_gui
-"""
 
 # Define Variables
 currentValue = 0
@@ -41,7 +35,8 @@ waterTransitions = {
     "prevTransition9": False,
     "prevTransition10": False
 }
-"""iced_teaTransitions = {
+
+ice_teaTransitions = {
     "canRunTransition0": True,
     "prevTransition0": False,
     "prevTransition1": False,
@@ -60,9 +55,9 @@ waterTransitions = {
     "prevTransition14": False,
     "prevTransition15": False,
     "prevTransition16": False
-"""
+}
 
-"""lemonadeTransitions = {
+lemonadeTransitions = {
     "canRunTransition0": True,
     "prevTransition0": False,
     "prevTransition1": False,
@@ -91,15 +86,14 @@ waterTransitions = {
     "prevTransition24": False,
     "prevTransition25": False,
 }
-"""
 
 productsList = {
     "water": {
         "name": "water",
         "value": 50
     },
-    "icetea": {
-        "name": "icetea",
+    "ice_tea": {
+        "name": "ice_tea",
         "value": 70
     },    
     "lemonade": {
@@ -161,13 +155,11 @@ def run_petri_net():
     if drink_var.get() == productsList["water"]["name"]:
         water_transitions(tokens, waterTransitions, buttons, coins, **data)
 
-"""if drink_var.get() == productsList["icetea"]["name"]:
-        icedtea_transitions(tokens, icedteaTransitions, buttons, coins, **data)
-"""
+    if drink_var.get() == productsList["ice_tea"]["name"]:
+        ice_tea_transitions(tokens, ice_teaTransitions, buttons, coins, **data)
 
-"""if drink_var.get() == productsList["lemonade"]["name"]:
+    if drink_var.get() == productsList["lemonade"]["name"]:
         lemonade_transitions(tokens, lemonadeTransitions, buttons, coins, **data)
-"""
 
 def run_reset():
     global currentValue
@@ -213,29 +205,35 @@ def run_reset():
         "canvas": canvas,
         "messages_text": messages_text,
     }
-
-    resetHandler(waterTransitions, tokens, buttons, coins, **data)
-
-"""resetHandler(icedteaTransitions, tokens, buttons, coins, **data)
-"""
-
-"""resetHandler(lemonadeTransitions, tokens, buttons, coins, **data)
-"""
+    
+    if drink_var.get() == productsList["water"]["name"]:
+        resetHandler(waterTransitions, tokens, buttons, coins, **data)
+    if drink_var.get() == productsList["ice_tea"]["name"]:
+        resetHandler(ice_teaTransitions, tokens, buttons, coins, **data)
+    if drink_var.get() == productsList["lemonade"]["name"]:
+        resetHandler(lemonadeTransitions, tokens, buttons, coins, **data)
 
 if __name__ == "__main__":
     root = tk.Tk()
     canvas = tk.Canvas(root, width=1000, height=300)
     canvas.pack()
     root.title("Petri net Αυτόματος Πωλητής")
-    
-    # if drink_var.get() == "null":
-    water_gui(canvas, tk)
+    drink_var = tk.StringVar(value="null")
+        
+    def update_drink_selection(*args):
+        selection = drink_var.get()
 
-    """icedtea_gui(canvas, tk)
-    """
+        if selection == "water":
+            canvas.delete("lemonade", "ice_tea")
+            water_gui(canvas, tk)
+        elif selection == "ice_tea":
+            canvas.delete("water", "lemonade")
+            ice_tea_gui(canvas, tk)
+        elif selection == "lemonade":
+            canvas.delete("water", "ice_tea")
+            lemonade_gui(canvas, tk)
 
-    """lemonade_gui(canvas, tk)
-    """
+    drink_var.trace("w", update_drink_selection)
 
     # Create GUI token
     token_TK_P1 = canvas.create_oval(15, 10, 45, 40, fill='red', state="normal")
@@ -260,13 +258,12 @@ if __name__ == "__main__":
     scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
     # Create a drink menu with radio buttons
-    drink_var = tk.StringVar(value="null")
     drink_menu = tk.Frame(root)
     tk.Label(drink_menu, text="Menu").pack(anchor="c")
     tk.Label(drink_menu, text="Επιλέξτε ποτό:").pack(anchor="c")
     water_radio_button = tk.Radiobutton(drink_menu, text="Νερό (€0.50)", variable=drink_var, state="normal", value="water")
-    icetea_radio_button = tk.Radiobutton(drink_menu, text="Παγωμένο τσάι (€0.70)", variable=drink_var, state="disabled", value="icetea")
-    lemonade_radio_button = tk.Radiobutton(drink_menu, text="Λεμονάδα (€1.10)", variable=drink_var, state="disabled", value="lemonade")
+    icetea_radio_button = tk.Radiobutton(drink_menu, text="Παγωμένο τσάι (€0.70)", variable=drink_var, state="normal", value="ice_tea")
+    lemonade_radio_button = tk.Radiobutton(drink_menu, text="Λεμονάδα (€1.10)", variable=drink_var, state="normal", value="lemonade")
     water_radio_button.pack(anchor="c")
     icetea_radio_button.pack(anchor="c")
     lemonade_radio_button.pack(anchor="c")
@@ -291,7 +288,7 @@ if __name__ == "__main__":
     # create action buttons
     select_product_button = tk.Button(root, text="Επιλέξτε προϊόν", state="normal", command=run_petri_net)
     insert_coin_button = tk.Button(root, text="Εισάγετε κέρμα", state="disabled", command=run_petri_net)
-    reset_button = tk.Button(root, text="Ακύρωση", state="disabled", command=run_reset)
+    reset_button = tk.Button(root, text="Επανεκκίνηση", state="disabled", command=run_reset)
     select_product_button.pack()
     insert_coin_button.pack()
     reset_button.pack()

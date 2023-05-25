@@ -9,16 +9,16 @@ from helpers import (
 transitionStatus = str()
 
 # Define the Petri net transitions for icetea
-def iced_tea_transitions(
-        tokens, iced_teaTransitions, buttons, coins, drink_var, coin_var, currentValue,
+def ice_tea_transitions(
+        tokens, ice_teaTransitions, buttons, coins, drink_var, coin_var, currentValue,
         productsList, canvas, messages_text,
 ):
     global transitionStatus
 
     def transition0():
         global transitionStatus
-        if drink_var.get() != "null" and iced_teaTransitions["canRunTransition0"]:
-            iced_teaTransitions["prevTransition0"] = True
+        if drink_var.get() != "null" and ice_teaTransitions["canRunTransition0"]:
+            ice_teaTransitions["prevTransition0"] = True
             transitionStatus = "T0"
             return True
         else:
@@ -26,9 +26,9 @@ def iced_tea_transitions(
         
     def transition1():
         global transitionStatus
-        if currentValue >= productsList["icetea"]["value"] and iced_teaTransitions["prevTransition0"]:
-            iced_teaTransitions["prevTransition0"] = False
-            iced_teaTransitions["prevTransition1"] = True
+        if currentValue >= productsList["ice_tea"]["value"] and ice_teaTransitions["prevTransition0"]:
+            ice_teaTransitions["prevTransition0"] = False
+            ice_teaTransitions["prevTransition1"] = True
             transitionStatus = "T1"
             return True
         else:
@@ -36,9 +36,9 @@ def iced_tea_transitions(
     
     def transition2():
         global transitionStatus
-        if currentValue == 10 and iced_teaTransitions["prevTransition0"]:
-            iced_teaTransitions["prevTransition0"] = False
-            iced_teaTransitions["prevTransition2"] = True
+        if currentValue == 10 and ice_teaTransitions["prevTransition0"]:
+            ice_teaTransitions["prevTransition0"] = False
+            ice_teaTransitions["prevTransition2"] = True
             transitionStatus = "T2"
             return True
         else:
@@ -46,9 +46,9 @@ def iced_tea_transitions(
 
     def transition3():
         global transitionStatus
-        if currentValue == 20 and iced_teaTransitions["prevTransition0"] and not iced_teaTransitions["prevTransition2"]:
-            iced_teaTransitions["prevTransition0"] = False
-            iced_teaTransitions["prevTransition3"] = True
+        if currentValue == 20 and ice_teaTransitions["prevTransition0"] and not ice_teaTransitions["prevTransition2"]:
+            ice_teaTransitions["prevTransition0"] = False
+            ice_teaTransitions["prevTransition3"] = True
             transitionStatus = "T3"
             return True
         else:
@@ -56,9 +56,9 @@ def iced_tea_transitions(
 
     def transition4():
         global transitionStatus
-        if currentValue == 20 and iced_teaTransitions["prevTransition2"]:
-            iced_teaTransitions["prevTransition2"] = False
-            iced_teaTransitions["prevTransition4"] = True
+        if currentValue == 20 and ice_teaTransitions["prevTransition2"]:
+            ice_teaTransitions["prevTransition2"] = False
+            ice_teaTransitions["prevTransition4"] = True
             transitionStatus = "T4"
             return True
         else:
@@ -66,9 +66,9 @@ def iced_tea_transitions(
         
     def transition5():
         global transitionStatus
-        if currentValue == 30 and iced_teaTransitions["prevTransition2"]:
-            iced_teaTransitions["prevTransition2"] = False
-            iced_teaTransitions["prevTransition5"] = True
+        if currentValue == 30 and ice_teaTransitions["prevTransition2"]:
+            ice_teaTransitions["prevTransition2"] = False
+            ice_teaTransitions["prevTransition5"] = True
             transitionStatus = "T5"
             return True
         else:
@@ -76,10 +76,10 @@ def iced_tea_transitions(
 
     def transition6():
         global transitionStatus
-        if currentValue == 30 and (iced_teaTransitions["prevTransition3"] or iced_teaTransitions["prevTransition4"]):
-            iced_teaTransitions["prevTransition3"] = False
-            iced_teaTransitions["prevTransition4"] = False
-            iced_teaTransitions["prevTransition6"] = True
+        if currentValue == 30 and (ice_teaTransitions["prevTransition3"] or ice_teaTransitions["prevTransition4"]):
+            ice_teaTransitions["prevTransition3"] = False
+            ice_teaTransitions["prevTransition4"] = False
+            ice_teaTransitions["prevTransition6"] = True
             transitionStatus = "T6"
             return True
         else:
@@ -87,10 +87,10 @@ def iced_tea_transitions(
 
     def transition7():
         global transitionStatus
-        if currentValue == 40 and (iced_teaTransitions["prevTransition3"] or iced_teaTransitions["prevTransition4"]):
-            iced_teaTransitions["prevTransition3"] = False
-            iced_teaTransitions["prevTransition4"] = False
-            iced_teaTransitions["prevTransition7"] = True
+        if currentValue == 40 and (ice_teaTransitions["prevTransition3"] or ice_teaTransitions["prevTransition4"]):
+            ice_teaTransitions["prevTransition3"] = False
+            ice_teaTransitions["prevTransition4"] = False
+            ice_teaTransitions["prevTransition7"] = True
             transitionStatus = "T7"
             return True
         else:
@@ -98,10 +98,10 @@ def iced_tea_transitions(
 
     def transition8():
         global transitionStatus
-        if currentValue == 40 and (iced_teaTransitions["prevTransition5"] or iced_teaTransitions["prevTransition6"]):
-            iced_teaTransitions["prevTransition5"] = False
-            iced_teaTransitions["prevTransition6"] = False
-            iced_teaTransitions["prevTransition8"] = True
+        if currentValue == 40 and (ice_teaTransitions["prevTransition5"] or ice_teaTransitions["prevTransition6"]):
+            ice_teaTransitions["prevTransition5"] = False
+            ice_teaTransitions["prevTransition6"] = False
+            ice_teaTransitions["prevTransition8"] = True
             transitionStatus = "T8"
             return True
         else:
@@ -109,10 +109,10 @@ def iced_tea_transitions(
 
     def transition9():
         global transitionStatus
-        if currentValue == 50 and (iced_teaTransitions["prevTransition5"] or iced_teaTransitions["prevTransition6"]):
-            iced_teaTransitions["prevTransition5"] = False
-            iced_teaTransitions["prevTransition6"] = False
-            iced_teaTransitions["prevTransition9"] = True
+        if currentValue == 50 and (ice_teaTransitions["prevTransition5"] or ice_teaTransitions["prevTransition6"]):
+            ice_teaTransitions["prevTransition5"] = False
+            ice_teaTransitions["prevTransition6"] = False
+            ice_teaTransitions["prevTransition9"] = True
             transitionStatus = "T9"
             return True
         else:
@@ -120,10 +120,10 @@ def iced_tea_transitions(
 
     def transition10():
         global transitionStatus
-        if currentValue == 50 and (iced_teaTransitions["prevTransition7"] or iced_teaTransitions["prevTransition8"]):
-            iced_teaTransitions["prevTransition7"] = False
-            iced_teaTransitions["prevTransition8"] = False
-            iced_teaTransitions["prevTransition10"] = True
+        if currentValue == 50 and (ice_teaTransitions["prevTransition7"] or ice_teaTransitions["prevTransition8"]):
+            ice_teaTransitions["prevTransition7"] = False
+            ice_teaTransitions["prevTransition8"] = False
+            ice_teaTransitions["prevTransition10"] = True
             transitionStatus = "T10"
             return True
         else:
@@ -131,10 +131,10 @@ def iced_tea_transitions(
 
     def transition11():
         global transitionStatus
-        if currentValue == 60 and (iced_teaTransitions["prevTransition7"] or iced_teaTransitions["prevTransition8"]):
-            iced_teaTransitions["prevTransition7"] = False
-            iced_teaTransitions["prevTransition8"] = False
-            iced_teaTransitions["prevTransition11"] = True
+        if currentValue == 60 and (ice_teaTransitions["prevTransition7"] or ice_teaTransitions["prevTransition8"]):
+            ice_teaTransitions["prevTransition7"] = False
+            ice_teaTransitions["prevTransition8"] = False
+            ice_teaTransitions["prevTransition11"] = True
             transitionStatus = "T11"
             return True
         else:
@@ -142,10 +142,10 @@ def iced_tea_transitions(
 
     def transition12():
         global transitionStatus
-        if currentValue == 60 and (iced_teaTransitions["prevTransition9"] or iced_teaTransitions["prevTransition10"]):
-            iced_teaTransitions["prevTransition9"] = False
-            iced_teaTransitions["prevTransition10"] = False
-            iced_teaTransitions["prevTransition12"] = True
+        if currentValue == 60 and (ice_teaTransitions["prevTransition9"] or ice_teaTransitions["prevTransition10"]):
+            ice_teaTransitions["prevTransition9"] = False
+            ice_teaTransitions["prevTransition10"] = False
+            ice_teaTransitions["prevTransition12"] = True
             transitionStatus = "T12"
             return True
         else:
@@ -153,10 +153,10 @@ def iced_tea_transitions(
 
     def transition13():
         global transitionStatus
-        if currentValue >= productsList["icetea"]["value"] and (iced_teaTransitions["prevTransition7"] or iced_teaTransitions["prevTransition8"] or iced_teaTransitions["prevTransition7"], iced_teaTransitions["prevTransition3"]):
-            iced_teaTransitions["prevTransition7"] = False
-            iced_teaTransitions["prevTransition8"] = False
-            iced_teaTransitions["prevTransition10"] = True
+        if currentValue >= productsList["ice_tea"]["value"] and (ice_teaTransitions["prevTransition7"] or ice_teaTransitions["prevTransition8"] or ice_teaTransitions["prevTransition7"], ice_teaTransitions["prevTransition3"]):
+            ice_teaTransitions["prevTransition7"] = False
+            ice_teaTransitions["prevTransition8"] = False
+            ice_teaTransitions["prevTransition10"] = True
             transitionStatus = "T13"
             return True
         else:
@@ -164,10 +164,10 @@ def iced_tea_transitions(
 
     def transition14():
         global transitionStatus
-        if currentValue >= productsList["icetea"]["value"] and (iced_teaTransitions["prevTransition7"] or iced_teaTransitions["prevTransition8"] or iced_teaTransitions["prevTransition7"], iced_teaTransitions["prevTransition3"]):
-            iced_teaTransitions["prevTransition7"] = False
-            iced_teaTransitions["prevTransition8"] = False
-            iced_teaTransitions["prevTransition10"] = True
+        if currentValue >= productsList["ice_tea"]["value"] and (ice_teaTransitions["prevTransition7"] or ice_teaTransitions["prevTransition8"] or ice_teaTransitions["prevTransition7"], ice_teaTransitions["prevTransition3"]):
+            ice_teaTransitions["prevTransition7"] = False
+            ice_teaTransitions["prevTransition8"] = False
+            ice_teaTransitions["prevTransition10"] = True
             transitionStatus = "T14"
             return True
         else:
@@ -175,9 +175,9 @@ def iced_tea_transitions(
         
     def transition15():
         global transitionStatus
-        if currentValue == 50 and iced_teaTransitions["prevTransition0"]:
-            iced_teaTransitions["prevTransition0"] = False
-            iced_teaTransitions["prevTransition15"] = True
+        if currentValue == 50 and ice_teaTransitions["prevTransition0"]:
+            ice_teaTransitions["prevTransition0"] = False
+            ice_teaTransitions["prevTransition15"] = True
             transitionStatus = "T15"
             return True
         else:
@@ -185,15 +185,15 @@ def iced_tea_transitions(
 
     def transition16():
         global transitionStatus
-        if currentValue == 100 and (iced_teaTransitions["prevTransition0"] or iced_teaTransitions["prevTransition15"]):
-            iced_teaTransitions["prevTransition15"] = False
-            iced_teaTransitions["prevTransition16"] = True
+        if currentValue == 100 and (ice_teaTransitions["prevTransition0"] or ice_teaTransitions["prevTransition15"]):
+            ice_teaTransitions["prevTransition15"] = False
+            ice_teaTransitions["prevTransition16"] = True
             transitionStatus = "T16"
             return True
         else:
             return False
 
-    if transition0() and iced_teaTransitions["canRunTransition0"]:
+    if transition0() and ice_teaTransitions["canRunTransition0"]:
         canvas.itemconfigure(tokens["token_TK_P1"], state="hidden")
         canvas.itemconfigure(tokens["token_TK_P2"], state="normal")
 
@@ -212,7 +212,7 @@ def iced_tea_transitions(
         buttons["reset_button"].config(state="normal")
 
         messageHandler(messages_text, f"{transitionStatus}: Το προϊόν προστέθηκε!")
-        iced_teaTransitions["canRunTransition0"] = False
+        ice_teaTransitions["canRunTransition0"] = False
 
     if transition1() or transition13() or transition14() or transition16():
         canvas.itemconfigure(tokens["token_TK_P13"], state="normal")
