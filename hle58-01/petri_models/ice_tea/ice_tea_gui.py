@@ -23,7 +23,7 @@ def ice_tea_gui(canvas, tk):
     # create GUI transitions
     T0_TK = canvas.create_rectangle(15, 80, 45, 100, outline='black', width=2, tags="ice_tea")#picked product
     textt0 = canvas.create_text(30, 90, text='T0', tags="ice_tea")
-    T1_TK = canvas.create_rectangle(465, 180, 495, 200, outline='black', width=2, tags="ice_tea")#+50
+    T1_TK = canvas.create_rectangle(465, 180, 495, 200, outline='black', width=2, tags="ice_tea")#+100, +200
     textt1 = canvas.create_text(480, 190, text='T1', tags="ice_tea")
     T2_TK = canvas.create_rectangle(180, 30, 210, 50, outline='black', width=2, tags="ice_tea")#+10
     textt2 = canvas.create_text(195, 40, text='T2', tags="ice_tea")
@@ -46,11 +46,15 @@ def ice_tea_gui(canvas, tk):
     T11_TK = canvas.create_rectangle(505, 130, 535, 150, outline='black', width=2, tags="ice_tea")
     textt11 = canvas.create_text(520, 140, text='T11', tags="ice_tea")
     T12_TK = canvas.create_rectangle(585, 80, 615, 100, outline='black', width=2, tags="ice_tea")
-    textt11 = canvas.create_text(600, 90, text='T12', tags="ice_tea")
+    textt12 = canvas.create_text(600, 90, text='T12', tags="ice_tea")
     T13_TK = canvas.create_rectangle(665, 30, 695, 50, outline='black', width=2, tags="ice_tea")
-    textt11 = canvas.create_text(680, 40, text='T13', tags="ice_tea")
+    textt13 = canvas.create_text(680, 40, text='T13', tags="ice_tea")
     T14_TK = canvas.create_rectangle(665, 130, 695, 150, outline='black', width=2, tags="ice_tea")
-    textt11 = canvas.create_text(680, 140, text='T14', tags="ice_tea")
+    textt14 = canvas.create_text(680, 140, text='T14', tags="ice_tea")
+    T15_TK = canvas.create_rectangle(345, 5, 375, 25, outline='black', width=2, tags="ice_tea")#+50
+    textt15 = canvas.create_text(360, 15, text='T15', tags="ice_tea")
+    T16_TK = canvas.create_rectangle(665, 5, 695, 25, outline='black', width=2, tags="ice_tea")#50+50
+    textt16 = canvas.create_text(680, 15, text='T16', tags="ice_tea")
 
     # create GUI arrows
     line = canvas.create_line(30, 45, 30, 75, arrow=tk.LAST, tags="ice_tea")#p1 - t0
@@ -60,7 +64,6 @@ def ice_tea_gui(canvas, tk):
     line = canvas.create_line(110, 115, 110, 190, 460, 190, arrow=tk.LAST, tags="ice_tea")#p2-t1 830
     line = canvas.create_line(500, 190, 980, 190, 980, 110, arrow=tk.LAST, tags="ice_tea")#t1-final
     line = canvas.create_line(110, 70, 110, 15, 340, 15, arrow=tk.LAST, tags="ice_tea")#p2-t15
-    line = canvas.create_line(380, 15, 600, 15, 600, 17, arrow=tk.LAST, tags="ice_tea")#t15-final
     line = canvas.create_line(215, 40, 260, 40, arrow=tk.LAST, tags="ice_tea")#t2-p3
     line = canvas.create_line(215, 140, 260, 140, arrow=tk.LAST, tags="ice_tea")#t3-p4
     line = canvas.create_line(280, 60, 280, 75, arrow=tk.LAST, tags="ice_tea")#p3-t4
@@ -75,11 +78,18 @@ def ice_tea_gui(canvas, tk):
     line = canvas.create_line(440, 105, 440, 120, arrow=tk.LAST, tags="ice_tea")#t8-p6
     line = canvas.create_line(460, 40, 500, 40, arrow=tk.LAST, tags="ice_tea")#p5-t9
     line = canvas.create_line(540, 40, 580, 40, arrow=tk.LAST, tags="ice_tea")#t9-p7
+    line = canvas.create_line(460, 125, 500, 100, arrow=tk.LAST, tags="ice_tea")#p6-t10
     line = canvas.create_line(460, 140, 500, 140, arrow=tk.LAST, tags="ice_tea")#p6-t11
+    line = canvas.create_line(540, 80, 580, 50, arrow=tk.LAST, tags="ice_tea")#t10-p7
+    line = canvas.create_line(460, 140, 500, 140, arrow=tk.LAST, tags="ice_tea")#p6-t11
+    line = canvas.create_line(600, 60, 600, 75, arrow=tk.LAST, tags="ice_tea")#p7-t12
     line = canvas.create_line(540, 140, 580, 140, arrow=tk.LAST, tags="ice_tea")#t11-p8
     line = canvas.create_line(620, 40, 660, 40, arrow=tk.LAST, tags="ice_tea")#p7-t13
     line = canvas.create_line(620, 140, 660, 140, arrow=tk.LAST, tags="ice_tea")#p8-t14
     line = canvas.create_line(700, 40, 965, 85, arrow=tk.LAST, tags="ice_tea")#t13-f
+    line = canvas.create_line(600, 105, 600, 120, arrow=tk.LAST, tags="ice_tea")#t12-p8
     line = canvas.create_line(700, 140, 965, 95, arrow=tk.LAST, tags="ice_tea")#t14-f
-
-    
+    line = canvas.create_line(110, 70, 110, 15, 340, 15, arrow=tk.LAST, tags="ice_tea")#p2-t15
+    line = canvas.create_line(380, 15, 520, 15, 580, 25, arrow=tk.LAST, tags="ice_tea")#t15-p7
+    line = canvas.create_line(620, 35, 660, 15, arrow=tk.LAST, tags="ice_tea")#p7-t16
+    line = canvas.create_line(700, 15, 980, 15, 980, 70, arrow=tk.LAST, tags="ice_tea")#t16-final
