@@ -222,6 +222,7 @@ if __name__ == "__main__":
         
     def update_drink_selection(*args):
         selection = drink_var.get()
+        canvas.itemconfigure(token_TK_P1, state="normal", fill="red")
 
         if selection == "water":
             canvas.delete("lemonade", "ice_tea")
@@ -236,7 +237,7 @@ if __name__ == "__main__":
     drink_var.trace("w", update_drink_selection)
 
     # Create GUI token
-    token_TK_P1 = canvas.create_oval(15, 10, 45, 40, fill='red', state="normal")
+    token_TK_P1 = canvas.create_oval(15, 10, 45, 40, fill='red', state="hidden")
     token_TK_P2 = canvas.create_oval(95, 75, 125, 105, fill="red", state="hidden")
     token_TK_P3 = canvas.create_oval(265,25,295,55, fill="red", state="hidden")
     token_TK_P4 = canvas.create_oval(265, 125, 295, 155, fill="red", state="hidden")
