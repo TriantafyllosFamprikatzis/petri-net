@@ -142,7 +142,8 @@ def ice_tea_transitions(
 
     def transition12():
         global transitionStatus
-        if currentValue == 60 and (ice_teaTransitions["prevTransition9"] or ice_teaTransitions["prevTransition10"]):
+        if currentValue == 60 and (ice_teaTransitions["prevTransition2"] or ice_teaTransitions["prevTransition9"] or ice_teaTransitions["prevTransition10"] or ice_teaTransitions["prevTransition2"]):
+            ice_teaTransitions["prevTransition2"] = False
             ice_teaTransitions["prevTransition9"] = False
             ice_teaTransitions["prevTransition10"] = False
             ice_teaTransitions["prevTransition12"] = True
