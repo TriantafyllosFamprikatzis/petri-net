@@ -282,7 +282,14 @@ def lemonade_transitions(
 
     def transition24():
         global transitionStatus
-        if currentValue >= productsList["lemonade"]["value"] and (lemonadeTransitions["prevTransition17"] or lemonadeTransitions["prevTransition18"]):
+        if currentValue >= productsList["lemonade"]["value"] and (lemonadeTransitions["prevTransition2"] or lemonadeTransitions["prevTransition5"] or lemonadeTransitions["prevTransition6"] or lemonadeTransitions["prevTransition9"] or lemonadeTransitions["prevTransition10"] or lemonadeTransitions["prevTransition13"] or lemonadeTransitions["prevTransition14"] or lemonadeTransitions["prevTransition17"] or lemonadeTransitions["prevTransition18"]):
+            lemonadeTransitions["prevTransition2"] = False
+            lemonadeTransitions["prevTransition5"] = False
+            lemonadeTransitions["prevTransition6"] = False
+            lemonadeTransitions["prevTransition9"] = False
+            lemonadeTransitions["prevTransition10"] = False
+            lemonadeTransitions["prevTransition13"] = False
+            lemonadeTransitions["prevTransition14"] = False
             lemonadeTransitions["prevTransition17"] = False
             lemonadeTransitions["prevTransition18"] = False
             lemonadeTransitions["prevTransition24"] = True
@@ -293,24 +300,16 @@ def lemonade_transitions(
 
     def transition25():
         global transitionStatus
-        if currentValue >= productsList["lemonade"]["value"] and (lemonadeTransitions["prevTransition2"] or lemonadeTransitions["prevTransition3"] or lemonadeTransitions["prevTransition4"] or lemonadeTransitions["prevTransition5"] or lemonadeTransitions["prevTransition6"] or lemonadeTransitions["prevTransition7"] or lemonadeTransitions["prevTransition8"] or lemonadeTransitions["prevTransition9"] or lemonadeTransitions["prevTransition10"] or lemonadeTransitions["prevTransition11"] or lemonadeTransitions["prevTransition12"] or lemonadeTransitions["prevTransition13"] or lemonadeTransitions["prevTransition14"] or lemonadeTransitions["prevTransition15"] or lemonadeTransitions["prevTransition16"] or lemonadeTransitions["prevTransition17"] or lemonadeTransitions["prevTransition18"] or lemonadeTransitions["prevTransition19"] or lemonadeTransitions["prevTransition20"] or lemonadeTransitions["prevTransition22"] or lemonadeTransitions["prevTransition23"]):
-            lemonadeTransitions["prevTransition2"] = False
+        if currentValue >= productsList["lemonade"]["value"] and (lemonadeTransitions["prevTransition3"] or lemonadeTransitions["prevTransition4"] or  lemonadeTransitions["prevTransition7"] or lemonadeTransitions["prevTransition8"] or lemonadeTransitions["prevTransition11"] or lemonadeTransitions["prevTransition12"] or lemonadeTransitions["prevTransition15"] or lemonadeTransitions["prevTransition16"] or lemonadeTransitions["prevTransition17"] or lemonadeTransitions["prevTransition18"] or lemonadeTransitions["prevTransition19"] or lemonadeTransitions["prevTransition20"] or lemonadeTransitions["prevTransition22"] or lemonadeTransitions["prevTransition23"]):
             lemonadeTransitions["prevTransition3"] = False
             lemonadeTransitions["prevTransition4"] = False
-            lemonadeTransitions["prevTransition5"] = False
-            lemonadeTransitions["prevTransition6"] = False
             lemonadeTransitions["prevTransition7"] = False
             lemonadeTransitions["prevTransition8"] = False
-            lemonadeTransitions["prevTransition9"] = False
-            lemonadeTransitions["prevTransition10"] = False
             lemonadeTransitions["prevTransition11"] = False
             lemonadeTransitions["prevTransition12"] = False
-            lemonadeTransitions["prevTransition13"] = False
-            lemonadeTransitions["prevTransition14"] = False
             lemonadeTransitions["prevTransition15"] = False
             lemonadeTransitions["prevTransition16"] = False
             lemonadeTransitions["prevTransition17"] = False
-            lemonadeTransitions["prevTransition18"] = False
             lemonadeTransitions["prevTransition19"] = False
             lemonadeTransitions["prevTransition20"] = False
             lemonadeTransitions["prevTransition22"] = False

@@ -154,14 +154,10 @@ def ice_tea_transitions(
 
     def transition13():
         global transitionStatus
-        if currentValue >= productsList["ice_tea"]["value"] and (ice_teaTransitions["prevTransition2"] or ice_teaTransitions["prevTransition3"] or ice_teaTransitions["prevTransition4"] or ice_teaTransitions["prevTransition5"] or ice_teaTransitions["prevTransition6"] or ice_teaTransitions["prevTransition7"] or ice_teaTransitions["prevTransition8"] or ice_teaTransitions["prevTransition9"] or ice_teaTransitions["prevTransition10"] or ice_teaTransitions["prevTransition15"]):
+        if currentValue >= productsList["ice_tea"]["value"] and (ice_teaTransitions["prevTransition2"] or ice_teaTransitions["prevTransition5"] or ice_teaTransitions["prevTransition6"] or ice_teaTransitions["prevTransition9"] or ice_teaTransitions["prevTransition10"] or ice_teaTransitions["prevTransition15"]):
             ice_teaTransitions["prevTransition2"] = False
-            ice_teaTransitions["prevTransition3"] = False
-            ice_teaTransitions["prevTransition4"] = False
             ice_teaTransitions["prevTransition5"] = False
             ice_teaTransitions["prevTransition6"] = False
-            ice_teaTransitions["prevTransition7"] = False
-            ice_teaTransitions["prevTransition8"] = False
             ice_teaTransitions["prevTransition9"] = False
             ice_teaTransitions["prevTransition10"] = False
             ice_teaTransitions["prevTransition15"] = False
@@ -173,7 +169,11 @@ def ice_tea_transitions(
 
     def transition14():
         global transitionStatus
-        if currentValue >= productsList["ice_tea"]["value"] and (ice_teaTransitions["prevTransition11"] or ice_teaTransitions["prevTransition12"]):
+        if currentValue >= productsList["ice_tea"]["value"] and (ice_teaTransitions["prevTransition3"] or ice_teaTransitions["prevTransition4"] or ice_teaTransitions["prevTransition7"] or ice_teaTransitions["prevTransition8"] or ice_teaTransitions["prevTransition11"] or ice_teaTransitions["prevTransition12"]):
+            ice_teaTransitions["prevTransition3"] = False
+            ice_teaTransitions["prevTransition4"] = False
+            ice_teaTransitions["prevTransition7"] = False
+            ice_teaTransitions["prevTransition8"] = False
             ice_teaTransitions["prevTransition11"] = False
             ice_teaTransitions["prevTransition12"] = False
             ice_teaTransitions["prevTransition14"] = True
