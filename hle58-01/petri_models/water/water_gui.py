@@ -38,7 +38,7 @@ def water_gui(canvas, tk):
     T9_TK = canvas.create_rectangle(505, 30, 535, 50, outline='black', width=2, tags="water")#30+20
     textt9 = canvas.create_text(520, 40, text='T9')
     T10_TK = canvas.create_rectangle(505, 130, 535, 150, outline='black', width=2, tags="water")
-    textt11 = canvas.create_text(520, 140, text='T10')
+    textt10 = canvas.create_text(520, 140, text='T10')
 
 
     # create GUI arrows
